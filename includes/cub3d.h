@@ -76,12 +76,6 @@ typedef	struct	s_map
 	char	**grid;		//2D array representing the map
 	int		width;
 	int		height;
-	char	*north_texture;
-	char	*south_texture;
-	char	*west_texture;
-	char	*east_texture;
-	int		floor_color;
-	int		ceiling_color;
 } t_map;
 
 typedef	struct	s_img
@@ -103,3 +97,17 @@ typedef	struct	s_game
 	int			screen_width;
 	int			screen_height;
 }	t_game;
+
+typedef struct s_tex
+{
+	char	*north_texture;
+	char	*south_texture;
+	char	*west_texture;
+	char	*east_texture;
+} t_tex;
+
+typedef struct s_color
+{
+	int		floor_color;
+	int		ceiling_color;
+}	t_color;
