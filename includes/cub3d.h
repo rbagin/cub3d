@@ -9,8 +9,10 @@
 /*   Updated: 2026/01/14 18:46:20 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-##ifndef CUB3D_H
+
+#ifndef CUB3D_H
 #define CUB3D_H
+
 # include <MLX42/MLX42.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -36,7 +38,7 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;	// Camera plane(perpendicular(90 degrees) to dir)
 	double	plane_y;
-}	t_player;
+}			t_player;
 
 /*	|RAY SETUP|
 		-camera_x: Maps screen x position to camera plane coordinates (-1 = left edge, 0 = center, 1 = right edge)
@@ -78,25 +80,46 @@ typedef	struct s_ray
 	int		line_height;		// height of wall line to draw
 	int		draw_start;			// lowest pixel to draw
 	int		draw_end;			// highest pixel to draw
-}	t_ray;
+}			t_ray;
 
 typedef	struct	s_map
 {
 	char	**grid;		//2D array representing the map
 	int		width;
 	int		height;
-} t_map;
+} 			t_map;
 
 typedef	struct	s_img
 {
-	void	*img_ptr;
+	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 	int		width;
 	int		height;
-}	t_img;
+}			t_img;
+
+typedef struct s_tex_set
+{
+	t_img	north;
+	t_img	south;
+	t_img	east;
+	t_img	west;
+}			t_texset;
+typedef struct s_tex_path
+{
+	char	*north_texture;
+	char	*south_texture;
+	char	*west_texture;
+	char	*east_texture;
+}			t_texpath;
+
+typedef struct s_color
+{
+	int		floor;
+	int		ceiling;
+}			t_color;
 
 typedef	struct	s_game
 {
@@ -106,31 +129,27 @@ typedef	struct	s_game
 	t_player	player;
 	t_map		map;
 	t_color		color;
-	t_tex		tex;
+	t_texset	tex;
+	t_input		inp; //global game state
 	int			screen_w;
 	int			screen_h;
 	bool		keys[256];
-}	t_game;
+}				t_game;
 
-typedef struct s_tex
+
+/*input state (keys pressed) hooks set/unset
+loop reads every frame to move
+int key_press(int keycode, t_game *g)
+int key_release(int keycode, t_game *g)
+*/
+typedef struct s_input
 {
-	char	*north_texture;
-	char	*south_texture;
-	char	*west_texture;
-	char	*east_texture;
-	// image
-	// pixels
-	t_img	north;
-	t_img	south;
-	t_img	east;
-	t_img	west;
-} t_tex;
-
-typedef struct s_color
-{
-	int		floor;
-	int		ceiling;
-}	t_color;
-
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+}			t_input;
 
 #endif

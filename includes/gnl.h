@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:25:30 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/01/23 19:21:44 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/01/24 17:40:02 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 3
+#  define BUFFER_SIZE 5
 # endif
 
 typedef struct s_gnl

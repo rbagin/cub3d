@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:22:59 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/01/24 16:58:35 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/01/24 17:31:24 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,10 @@
 # define WE
 # define F
 # define C
+
+# define PLAYER_N 'N'
+# define PLAYER_S 'S'
+# define PLAYER_W 'W'
+# define PLAYER_E 'E'
 
 #endif
