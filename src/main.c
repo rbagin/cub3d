@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:29:24 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/01/23 19:38:08 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/01/24 16:21:39 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	init_g_struct(t_game *game)
 
 int	main(int argc, char const *argv[])
 {
+	//parsing
 	if (argc != 2)
 		return (print_exit(ERR_ARGS, NULL, false), EXIT_FAILURE);
 	init_g_struct(&game);
@@ -27,9 +28,9 @@ int	main(int argc, char const *argv[])
 		return (EXIT_FAILURE);
 	//validation
 	//initialisation
-	//parsing
-	//start
-	//end
+	//render
+	//raycast walls
+	//movement rotation
 	//cleanup
 
 	return (0);
