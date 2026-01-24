@@ -9,6 +9,15 @@
 /*   Updated: 2026/01/14 18:46:20 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+##ifndef CUB3D_H
+#define CUB3D_H
+# include <MLX42/MLX42.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include "libft.h"
 
 /*	|pos_x, pos_y|
 		-The player's exact position in the 2D map (floating point for smooth movement)
@@ -65,7 +74,7 @@ typedef	struct s_ray
 	bool	hit;
 	int		side;	// 0 = x side || 1 = y side
 
-	double	perp_wall__dist;	// perpendicular(90 degrees) distance to wall
+	double	perp_wall_dist;	// perpendicular(90 degrees) distance to wall
 	int		line_height;		// height of wall line to draw
 	int		draw_start;			// lowest pixel to draw
 	int		draw_end;			// highest pixel to draw
@@ -85,17 +94,22 @@ typedef	struct	s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef	struct	s_game
 {
 	void		*mlx;
 	void		*win;
-	t_img		img;
+	t_img		frame;
 	t_player	player;
 	t_map		map;
-	int			screen_width;
-	int			screen_height;
+	t_color		color;
+	t_tex		tex;
+	int			screen_w;
+	int			screen_h;
+	bool		keys[256];
 }	t_game;
 
 typedef struct s_tex
@@ -104,10 +118,19 @@ typedef struct s_tex
 	char	*south_texture;
 	char	*west_texture;
 	char	*east_texture;
+	// image
+	// pixels
+	t_img	north;
+	t_img	south;
+	t_img	east;
+	t_img	west;
 } t_tex;
 
 typedef struct s_color
 {
-	int		floor_color;
-	int		ceiling_color;
+	int		floor;
+	int		ceiling;
 }	t_color;
+
+
+#endif
