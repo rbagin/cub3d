@@ -6,11 +6,17 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:29:24 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/01/24 18:08:35 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/01/25 17:25:03 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+/* 
+Parsing needs to be nearly done to init window.
+It’s too early for MLX. Ravi can implement the pure raycasting math
+ (init_ray, DDA, perp dist) with no graphics calls, just using t_game + t_ray
+ Goal: a set of functions that take t_game + screen_x and compute ray hit data only.
+*/
 
 static void	init_g_struct(t_game *game)
 {
@@ -28,11 +34,11 @@ int	main(int argc, char const *argv[])
 	if (!load_map(&game, argv[1]))
 		return (EXIT_FAILURE);
 	//validation (map closed/ 1spawn / all ids present / rgb valid)
-	if (!valid_cub(&game))
-		return (cleanup(&game), 1);
+	// if (!valid_cub(&game))
+	// 	return (cleanup(&game), 1);
 	//initialisation
-	if (!init_mlx(&game))
-		return (cleanup(&game), 1);
+	// if (!init_mlx(&game))
+	// 	return (cleanup(&game), 1);
 	//create init frame buff
 	//load textures
 	//render
