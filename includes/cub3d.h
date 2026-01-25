@@ -100,19 +100,20 @@ typedef	struct	s_img
 	int		height;
 }			t_img;
 
-typedef struct s_tex_set
+typedef enum e_side
 {
-	t_img	north;
-	t_img	south;
-	t_img	east;
-	t_img	west;
-}			t_texset;
+	TEX_N = 0,
+	TEX_S = 1,
+	TEX_W = 2,
+	TEX_E = 3
+}	t_side;
+
 typedef struct s_tex_path
 {
-	char	*north_texture;
-	char	*south_texture;
-	char	*west_texture;
-	char	*east_texture;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
 }			t_texpath;
 
 typedef struct s_color
@@ -129,11 +130,11 @@ typedef	struct	s_game
 	t_player	player;
 	t_map		map;
 	t_color		color;
-	t_texset	tex;
+	t_texpath	paths;
+	t_texset	tex[4];
 	t_input		inp; //global game state
 	int			screen_w;
 	int			screen_h;
-	bool		keys[256];
 }				t_game;
 
 
