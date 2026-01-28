@@ -5,8 +5,13 @@ INCDIR = include
 MLXDIR = MLX42/MLX42
 LIBFTDIR = ./libft
 SRC_F = init.c cleanup.c main.c \
-       map.c map_check.c utils.c path.c \
-       render.c hooks.c player.c
+       map_load.c \
+       map_check.c \
+       utils.c \
+       path.c \
+       render.c \
+       hooks.c \
+       player.c
 SRCS = $(addprefix $(SRCDIR)/, $(SRC_F))
 OBJS = $(addprefix $(OBJDIR)/, $(SRC_F:.c=.o))
 INCLUDE = -I$(INCDIR) -I$(MLXDIR)/include -I$(LIBFTDIR) -I./

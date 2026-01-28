@@ -6,11 +6,11 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:29:24 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/01/25 17:25:03 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/01/25 18:17:53 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "cub3d.h"
 /* 
 Parsing needs to be nearly done to init window.
 It’s too early for MLX. Ravi can implement the pure raycasting math
