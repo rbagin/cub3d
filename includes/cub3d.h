@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/14 18:14:26 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/01/14 18:46:20 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/01/28 15:23:03 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include "libft.h"
+
+
+typedef struct s_pos
+{
+	double	x;	// position on the map
+	double	y;
+}	t_pos;
 
 /*	|pos_x, pos_y|
 		-The player's exact position in the 2D map (floating point for smooth movement)
@@ -89,12 +96,6 @@ typedef	struct	s_map
 	t_pos	player_p;
 } 	t_map;
 
-typedef struct s_pos
-{
-	double	x;	// position on the map
-	double	y;
-}	t_pos;
-
 typedef	struct	s_img
 {
 	void	*img;
@@ -135,6 +136,11 @@ typedef struct s_texset
 	int				height;
 }			t_texset;
 
+/*input state (keys pressed) hooks set/unset
+loop reads every frame to move
+int key_press(int keycode, t_game *g)
+int key_release(int keycode, t_game *g)
+*/
 typedef struct s_input
 {
 	bool	w;
@@ -160,23 +166,10 @@ typedef	struct	s_game
 	int			screen_h;
 }				t_game;
 
-
-/*input state (keys pressed) hooks set/unset
-loop reads every frame to move
-int key_press(int keycode, t_game *g)
-int key_release(int keycode, t_game *g)
-*/
-typedef struct s_input
-{
-	bool	w;
-	bool	a;
-	bool	s;
-	bool	d;
-	bool	left;
-	bool	right;
-}			t_input;
-
 //parsing map
 bool	lead_map(t_game *g, const char *filename);
+
+//raycasting
+void	cast_ray(t_player *player, t_map *map, t_ray *ray);
 
 #endif
