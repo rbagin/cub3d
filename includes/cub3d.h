@@ -32,8 +32,7 @@
 		-typically around 66 degrees for classic raycasting*/
 typedef struct s_player
 {
-	double	pos_x;	// position on the map
-	double	pos_y;
+	t_pos	pos;
 	double	dir_x;	// direction on the map
 	double	dir_y;
 	double	plane_x;	// Camera plane(perpendicular(90 degrees) to dir)
@@ -87,7 +86,14 @@ typedef	struct	s_map
 	char	**grid;		//2D array representing the map
 	int		width;
 	int		height;
-} 			t_map;
+	t_pos	player_p;
+} 	t_map;
+
+typedef struct s_pos
+{
+	double	x;	// position on the map
+	double	y;
+}	t_pos;
 
 typedef	struct	s_img
 {
@@ -152,5 +158,8 @@ typedef struct s_input
 	bool	left;
 	bool	right;
 }			t_input;
+
+//parsing map
+bool	lead_map(t_game *g, const char *filename);
 
 #endif
