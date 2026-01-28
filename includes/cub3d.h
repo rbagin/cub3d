@@ -128,6 +128,23 @@ typedef struct s_color
 	int		ceiling;
 }			t_color;
 
+typedef struct s_texset
+{
+	mlx_texture_t	*texture;
+	int				width;
+	int				height;
+}			t_texset;
+
+typedef struct s_input
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+}			t_input;
+
 typedef	struct	s_game
 {
 	void		*mlx;
