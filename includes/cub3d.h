@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/14 18:14:26 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/01/28 15:23:03 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/01/29 14:07:05 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <stdio.h>
+# include <math.h>
 # include "libft.h"
+# include "gnl.h"
+# include "macro.h"
 
 
 typedef struct s_pos

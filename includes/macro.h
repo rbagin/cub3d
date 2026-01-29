@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   macro.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 16:22:59 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/01/24 17:31:24 by imutavdz         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   macro.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/01/23 16:22:59 by imutavdz      #+#    #+#                 */
+/*   Updated: 2026/01/29 17:18:29 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,9 @@
 # define PLAYER_S 'S'
 # define PLAYER_W 'W'
 # define PLAYER_E 'E'
+
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
+# define FOV_SCALE 66
 
 #endif
