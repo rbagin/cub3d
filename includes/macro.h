@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/23 16:22:59 by imutavdz      #+#    #+#                 */
-/*   Updated: 2026/01/29 17:18:29 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/01 22:51:35 by ravi-bagin    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,14 @@
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 # define FOV_SCALE 66
+
+# define CREATE_RGB(r, g, b) ((r) << 16 | (g) << 8 | (b))
+
+# define N_COLOR CREATE_RGB(167, 17, 17)
+# define S_COLOR CREATE_RGB(26, 214, 26)
+# define E_COLOR CREATE_RGB(2, 47, 226)
+# define W_COLOR CREATE_RGB(192, 244, 5)
+# define FLOOR_COLOR CREATE_RGB(0, 0, 0)
+# define CEILING_COLOR CREATE_RGB(255,255,255)
 
 #endif

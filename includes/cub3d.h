@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/14 18:14:26 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/01/29 14:07:05 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/01/30 15:34:08 by ravi-bagin    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,10 @@ typedef	struct	s_game
 //parsing map
 bool	lead_map(t_game *g, const char *filename);
 
-//raycasting
+//raycasting/rendering
 void	cast_ray(t_player *player, t_map *map, t_ray *ray);
+void	render_scene(t_game *game, t_player *player, t_ray *ray);
+
+//
 
 #endif

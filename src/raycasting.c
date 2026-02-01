@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/28 12:43:35 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/01/29 17:21:11 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/01 22:22:35 by ravi-bagin    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,40 @@ void	cast_ray(t_player *player, t_map *map, t_ray *ray)
 	}
 }
 
+int	get_wall_color(t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		if (ray->step_x == 1)
+			return (W_COLOR);
+		else
+			return (E_COLOR);
+	}
+	else
+	{
+		if (ray->step_y == 1)
+			return (N_COLOR);
+		else
+			return (S_COLOR);
+	}
+}
+
+void	draw_vertical_line(t_game *game, int x, t_ray *ray)
+{
+	int	color;
+	int	y;
+	int	pixel_index;
+
+	color = get_wall_color(ray);
+	y = ray->draw_start;
+	while (y < ray->draw_end)
+	{
+		pixel_index = (y * game->frame.line_length) + (x * game->frame.bits_per_pixel / 8);
+		*(int *)(game->frame.addr + pixel_index) = color;
+		y++;
+	}
+}
+
 void	render_scene(t_game *game, t_player *player, t_ray *ray)
 {
 	int	x;
@@ -90,4 +124,5 @@ void	render_scene(t_game *game, t_player *player, t_ray *ray)
 		draw_vertical_line(game, x, ray);
 		x++;
 	}
+	mlx_put_image_to_window(game->mlx, game->win, game->frame.img, 0, 0);
 }
