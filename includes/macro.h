@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/23 16:22:59 by imutavdz      #+#    #+#                 */
-/*   Updated: 2026/02/01 22:51:35 by ravi-bagin    ########   odam.nl         */
+/*   Updated: 2026/02/02 19:36:25 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@
 # define SCREEN_HEIGHT 720
 # define FOV_SCALE 66
 
-# define CREATE_RGB(r, g, b) ((r) << 16 | (g) << 8 | (b))
+# define CREATE_RGBA(r, g, b, a) ((r) << 24 | (g) << 16 | (b) << 8 | (a))
 
-# define N_COLOR CREATE_RGB(167, 17, 17)
-# define S_COLOR CREATE_RGB(26, 214, 26)
-# define E_COLOR CREATE_RGB(2, 47, 226)
-# define W_COLOR CREATE_RGB(192, 244, 5)
-# define FLOOR_COLOR CREATE_RGB(0, 0, 0)
-# define CEILING_COLOR CREATE_RGB(255,255,255)
+# define N_COLOR CREATE_RGBA(167, 17, 17, 255)
+# define S_COLOR CREATE_RGBA(26, 214, 26, 255)
+# define E_COLOR CREATE_RGBA(2, 47, 226, 255)
+# define W_COLOR CREATE_RGBA(192, 244, 5, 255)
+# define FLOOR_COLOR CREATE_RGBA(0, 0, 0, 255)
+# define CEILING_COLOR CREATE_RGBA(255,255,255, 255)
 
 #endif

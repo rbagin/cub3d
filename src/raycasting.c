@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/28 12:43:35 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/01 22:22:35 by ravi-bagin    ########   odam.nl         */
+/*   Updated: 2026/02/02 19:34:21 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@ void	cast_ray(t_player *player, t_map *map, t_ray *ray)
 	ray->map_x = floor(player->pos.x);
 	ray->map_y = floor(player->pos.y);
 
-	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
-	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+	if (ray->ray_dir_x == 0)
+		ray->delta_dist_x = 1e30;
+	else
+		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
+	if (ray->ray_dir_y == 0)
+		ray->delta_dist_y = 1e30;
+	else
+		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 
 	if (ray->ray_dir_x < 0)
 	{
@@ -69,7 +75,7 @@ void	cast_ray(t_player *player, t_map *map, t_ray *ray)
 	}
 }
 
-int	get_wall_color(t_ray *ray)
+uint32_t	get_wall_color(t_ray *ray)
 {
 	if (ray->side == 0)
 	{
@@ -89,16 +95,14 @@ int	get_wall_color(t_ray *ray)
 
 void	draw_vertical_line(t_game *game, int x, t_ray *ray)
 {
-	int	color;
+	uint32_t	color;
 	int	y;
-	int	pixel_index;
 
 	color = get_wall_color(ray);
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		pixel_index = (y * game->frame.line_length) + (x * game->frame.bits_per_pixel / 8);
-		*(int *)(game->frame.addr + pixel_index) = color;
+		mlx_put_pixel(game->frame.img, x, y, color);
 		y++;
 	}
 }
@@ -107,6 +111,8 @@ void	render_scene(t_game *game, t_player *player, t_ray *ray)
 {
 	int	x;
 
+	ft_memset(game->frame.img->pixels, 0,
+		game->frame.img->width * game->frame.img->height * sizeof(uint32_t));
 	x = 0;
 	while(x < SCREEN_WIDTH)
 	{
@@ -124,5 +130,4 @@ void	render_scene(t_game *game, t_player *player, t_ray *ray)
 		draw_vertical_line(game, x, ray);
 		x++;
 	}
-	mlx_put_image_to_window(game->mlx, game->win, game->frame.img, 0, 0);
 }

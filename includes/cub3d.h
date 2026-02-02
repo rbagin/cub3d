@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/14 18:14:26 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/01/30 15:34:08 by ravi-bagin    ########   odam.nl         */
+/*   Updated: 2026/02/02 19:13:16 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef	struct	s_map
 
 typedef	struct	s_img
 {
-	void	*img;
+	mlx_image_t	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -156,7 +156,7 @@ typedef struct s_input
 
 typedef	struct	s_game
 {
-	void		*mlx;
+	mlx_t		*mlx;
 	void		*win;
 	t_img		frame;
 	t_player	player;
