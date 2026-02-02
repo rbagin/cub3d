@@ -6,9 +6,11 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 17:43:33 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/02 14:14:21 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/02 20:19:43 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*(For colors, best is to add flags later: bool has_floor; bool has_ceiling;)*/
 
 #include "cub3d.h"
 
@@ -82,5 +84,5 @@ void	find_spawn(t_game *g)
 		}
 	}
 	if (count != 1)
-		print_exit(ERR_MAP_CHARS, g, true);
+		print_exit(ERR_MAP_SPAWN, g, true);
 }

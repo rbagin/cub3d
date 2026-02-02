@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 17:42:59 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/02 13:42:32 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/02 21:00:37 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,25 @@ bool	parse_valid_map(t_game *game)
 {
 	if (!game->map.grid[0] || game->map.height <= 0)
 		print_exit(ERR_MAP_EMPTY, game, true);
+}
+char	**split_lines(char *file_str, t_game *g)
+{
+
+}
+
+bool	is_blank_line(const char *line)
+{
+
+}
+
+bool	is_map_line(const char *line)
+{
+
+} 
+
+bool	parse_rgb(const char *s, int *out_color)
+{
+
 }
 
 bool	parse_color_line(const char *line, t_game *g)
@@ -33,7 +52,7 @@ bool	set_tex_path(char **des, const char *path_pt)
 
 	if (*dst != NULL)
 		return (false);
-	trim = ft_strtrim(path_pt, "\t");
+	trim = ft_strtrim(path_pt, " \t");
 	if (!trim)
 		return (false);
 	if (trim[0] == '\0')
