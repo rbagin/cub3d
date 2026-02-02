@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/14 18:14:26 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/02 19:13:16 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/02 20:55:39 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,10 +172,12 @@ typedef	struct	s_game
 //parsing map
 bool	lead_map(t_game *g, const char *filename);
 
-//raycasting/rendering
+//raycasting.c
 void	cast_ray(t_player *player, t_map *map, t_ray *ray);
 void	render_scene(t_game *game, t_player *player, t_ray *ray);
 
-//
+//render.c
+uint32_t	get_wall_color(t_ray *ray);
+void	draw_vertical_line(t_game *game, int x, t_ray *ray);
 
 #endif

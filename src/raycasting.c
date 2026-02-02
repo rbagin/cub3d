@@ -6,17 +6,14 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/28 12:43:35 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/02 19:34:21 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/02 21:04:24 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	cast_ray(t_player *player, t_map *map, t_ray *ray)
+static void	init_ray_delta(t_ray *ray)
 {
-	ray->map_x = floor(player->pos.x);
-	ray->map_y = floor(player->pos.y);
-
 	if (ray->ray_dir_x == 0)
 		ray->delta_dist_x = 1e30;
 	else
@@ -25,7 +22,10 @@ void	cast_ray(t_player *player, t_map *map, t_ray *ray)
 		ray->delta_dist_y = 1e30;
 	else
 		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+}
 
+static void	init_ray_step(t_player *player, t_ray *ray)
+{
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;
@@ -46,11 +46,14 @@ void	cast_ray(t_player *player, t_map *map, t_ray *ray)
 		ray->step_y = 1;
 		ray->side_dist_y = (ray->map_y + 1 - player->pos.y) * ray->delta_dist_y;
 	}
-	ray->hit = false;
+}
 
-	while(ray->hit == false)
+static void	perform_dda(t_map *map, t_ray *ray)
+{
+	ray->hit = false;
+	while (ray->hit == false)
 	{
-		if(ray->side_dist_x < ray->side_dist_y)
+		if (ray->side_dist_x < ray->side_dist_y)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
 			ray->map_x += ray->step_x;
@@ -62,72 +65,33 @@ void	cast_ray(t_player *player, t_map *map, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (map->grid[ray->map_y][ray->map_x] == '1')
+		if (ray->map_x < 0 || ray->map_x >= map->width || ray->map_y < 0
+			|| ray->map_y >= map->height
+			|| map->grid[ray->map_y][ray->map_x] == '1')
 			ray->hit = true;
 	}
-	if (ray->side == 0)
-	{
-		ray->perp_wall_dist = (ray->map_x - player->pos.x + (1 - ray->step_x) / 2) / ray->ray_dir_x;
-	}
-	else
-	{
-		ray->perp_wall_dist = (ray->map_y - player->pos.y + (1 - ray->step_y) / 2) / ray->ray_dir_y;
-	}
 }
 
-uint32_t	get_wall_color(t_ray *ray)
+void	calc_perp_dist(t_player *player, t_ray *ray)
 {
 	if (ray->side == 0)
 	{
-		if (ray->step_x == 1)
-			return (W_COLOR);
-		else
-			return (E_COLOR);
+		ray->perp_wall_dist = (ray->map_x - player->pos.x
+				+ (1 - ray->step_x) / 2) / ray->ray_dir_x;
 	}
 	else
 	{
-		if (ray->step_y == 1)
-			return (N_COLOR);
-		else
-			return (S_COLOR);
+		ray->perp_wall_dist = (ray->map_y - player->pos.y
+				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
 	}
 }
 
-void	draw_vertical_line(t_game *game, int x, t_ray *ray)
+void	cast_ray(t_player *player, t_map *map, t_ray *ray)
 {
-	uint32_t	color;
-	int	y;
-
-	color = get_wall_color(ray);
-	y = ray->draw_start;
-	while (y < ray->draw_end)
-	{
-		mlx_put_pixel(game->frame.img, x, y, color);
-		y++;
-	}
-}
-
-void	render_scene(t_game *game, t_player *player, t_ray *ray)
-{
-	int	x;
-
-	ft_memset(game->frame.img->pixels, 0,
-		game->frame.img->width * game->frame.img->height * sizeof(uint32_t));
-	x = 0;
-	while(x < SCREEN_WIDTH)
-	{
-		ray->camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
-		ray->ray_dir_x = player->dir_x + (player->plane_x * ray->camera_x);
-		ray->ray_dir_y = player->dir_y + (player->plane_y * ray->camera_x);
-		cast_ray(&game->player, &game->map, ray);
-		ray->line_height = (int)(SCREEN_HEIGHT / ray->perp_wall_dist);
-		ray->draw_start = -ray->line_height / 2 + SCREEN_HEIGHT / 2;
-		if (ray->draw_start < 0)
-			ray->draw_start = 0;
-		ray->draw_end = ray->line_height / 2 + SCREEN_HEIGHT / 2;
-		if (ray->draw_end >= SCREEN_HEIGHT)
-			ray->draw_end = SCREEN_HEIGHT -1;
-		draw_vertical_line(game, x, ray);
-		x++;
-	}
+	ray->map_x = floor(player->pos.x);
+	ray->map_y = floor(player->pos.y);
+	init_ray_delta(ray);
+	init_ray_step(player, ray);
+	perform_dda(map, ray);
+	calc_perp_dist(player, ray);
 }

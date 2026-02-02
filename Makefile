@@ -43,7 +43,9 @@ fclean: clean
 	@make -C $(LIBFTDIR)  fclean --no-print-directory
 
 TEST_NAME = test_ray
-TEST_SRC = $(SRCDIR)/testing/test_raycasting.c $(SRCDIR)/raycasting.c
+TEST_SRC = $(SRCDIR)/testing/test_raycasting.c \
+	$(SRCDIR)/raycasting.c \
+	$(SRCDIR)/render.c
 TEST_INCLUDE = -I includes -I $(LIBFTDIR) -I $(MLXDIR)/include
 
 test: $(LIBFT) $(MLX_A)
