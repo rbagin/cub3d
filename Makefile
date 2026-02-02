@@ -11,6 +11,7 @@ SRC_F = init.c cleanup.c main.c \
        path.c \
        render.c \
        hooks.c \
+       raycasting.c \
        player.c
 SRCS = $(addprefix $(SRCDIR)/, $(SRC_F))
 OBJS = $(addprefix $(OBJDIR)/, $(SRC_F:.c=.o))

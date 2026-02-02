@@ -135,16 +135,6 @@ typedef struct s_texset
 	int				height;
 }			t_texset;
 
-typedef struct s_input
-{
-	bool	w;
-	bool	a;
-	bool	s;
-	bool	d;
-	bool	left;
-	bool	right;
-}			t_input;
-
 typedef	struct	s_game
 {
 	void		*mlx;
@@ -177,6 +167,6 @@ typedef struct s_input
 }			t_input;
 
 //parsing map
-bool	lead_map(t_game *g, const char *filename);
+bool	load_map(t_game *g, const char *filename);
 
 #endif
