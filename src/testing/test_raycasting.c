@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/28 15:13:41 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/01 23:13:00 by ravi-bagin    ########   odam.nl         */
+/*   Updated: 2026/02/02 12:38:20 by ravi-bagin    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 int	main(void)
 {
 	t_game		game;
+	t_ray		ray;
 	char		*test_grid[] = {
 		"111111111",
 		"100000001",
@@ -43,13 +44,13 @@ int	main(void)
 	game.player.plane_x = 0.0;
 	game.player.plane_y = 0.66;
 
-	mlx_init();
+	mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d", false);
 	mlx_new_window();
-	mlx_new_image();
+	mlx_new_image(game.mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	mlx_init_image();
-	render_scene();
+	render_scene(&game, &game.player, &ray);
 	mlx_put_image_to_window();
-	mlx_loop();
+	mlx_loop(game.mlx);
 
 	return (0);
 }
