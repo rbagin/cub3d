@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:22:59 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/02 21:01:43 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/03 20:03:45 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
 # define ERR_MEMORY "Error\nMemory allocation failed"
 # define ERR_MLX "Error\nMLX initialization failed"
 # define ERR_MAP_EMPTY "Error\nNo map found"
-
-# define NO
-# define SO
-# define EA
-# define WE
-# define F
-# define C
+//.cub identifiers
+# define NO "NO"
+# define SO "SO"
+# define EA "EA"
+# define WE "WE"
+# define F "F"
+# define C "C"
 
 # define PLAYER_N 'N'
 # define PLAYER_S 'S'

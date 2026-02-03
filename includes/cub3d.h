@@ -14,22 +14,30 @@
 #define CUB3D_H
 
 # include <MLX42/MLX42.h>
+
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdbool.h>
 # include <stdio.h>
+
 # include "libft.h"
 
-/*	|pos_x, pos_y|
-		-The player's exact position in the 2D map (floating point for smooth movement)
-	|dir_x, dir_y|
-		-Direction vector - where the player is looking(normalized vector)
-	|plane_x, plane_y|
-		-Camera plane - perpendicular(90) to direction vector
-		-this defines the field of view (FOV)
-		-the length of this vector determines the FOV angle
-		-typically around 66 degrees for classic raycasting*/
+/*input state (keys pressed) hooks set/unset
+loop reads every frame to move
+int key_press(int keycode, t_game *g)
+int key_release(int keycode, t_game *g)
+*/
+typedef struct s_input
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	left;
+	bool	right;
+}			t_input;
+
 typedef struct s_player
 {
 	t_pos	pos;
@@ -39,21 +47,6 @@ typedef struct s_player
 	double	plane_y;
 }			t_player;
 
-/*	|RAY SETUP|
-		-camera_x: Maps screen x position to camera plane coordinates (-1 = left edge, 0 = center, 1 = right edge)
-		-ray_dir_x, ray_dir_y: The actual direction the ray is traveling (dir + plane * camera_x)
-	|DDA ALGORITHM|
-		-map_x, map_y: Which grid square we're currently checking (integer coordinates)
-		-side_dist_x, side_dist_y: Distance the ray must travel from its current position to the next x or y gridline
-		-delta_dist_x, delta_dist_y: How far the ray travels to cross exactly one map square (constant per ray)
-		-step_x, step_y: Which direction to step in the grid (1 or -1)
-	|HIT DETECTION|
-		-hit: Boolean flag indicating if we've hit a wall
-		-side: Which face of the wall was hit (NS walls vs EW walls) - needed for different wall textures/shading
-	|RENDERING|
-		-perp_wall_dist: The perpendicular distance to avoid fisheye effect
-		-line_height: How tall to draw the wall slice
-		-draw_start, draw_end: Y coordinates for where to start/stop drawing this wall slice*/
 typedef	struct s_ray
 {
 	double	camera_x;	// x coordinate on camera plane (-1 to 1)
@@ -86,9 +79,9 @@ typedef	struct	s_map
 	char	**grid;		//2D array representing the map
 	int		width;
 	int		height;
-	t_pos	player_p;
 } 	t_map;
-
+//A simple 2D coordinate in map-space (floating point so you can be between tiles).
+//x, y: player position in the grid coordinate system (tile units)
 typedef struct s_pos
 {
 	double	x;	// position on the map
@@ -97,13 +90,11 @@ typedef struct s_pos
 
 typedef	struct	s_img
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	int		width;
-	int		height;
+	mlx_texture_t	*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				width;
+	int				height;
 }			t_img;
 
 typedef enum e_side
@@ -137,34 +128,21 @@ typedef struct s_texset
 
 typedef	struct	s_game
 {
-	void		*mlx;
-	void		*win;
-	t_img		frame;
-	t_player	player;
-	t_map		map;
-	t_color		color;
-	t_texpath	paths;
-	t_texset	tex[4];
-	t_input		inp; //global game state
-	int			screen_w;
-	int			screen_h;
-}				t_game;
+	mlx_t			*mlx;
+	mlx_image_t		*frame;
+
+	t_player		player;
+	t_map			map;
+
+	t_color			color;
+	t_texpath		paths;
+	t_tex			tex[4];
+	t_input			inp; //global game state
+	int				screen_w;
+	int				screen_h;
+}	t_game;
 
 
-/*input state (keys pressed) hooks set/unset
-loop reads every frame to move
-int key_press(int keycode, t_game *g)
-int key_release(int keycode, t_game *g)
-*/
-typedef struct s_input
-{
-	bool	w;
-	bool	a;
-	bool	s;
-	bool	d;
-	bool	left;
-	bool	right;
-}			t_input;
 
 //parsing map
 bool	load_map(t_game *g, const char *filename);
