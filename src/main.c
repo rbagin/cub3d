@@ -6,17 +6,11 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:29:24 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/02 14:08:45 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/03 20:00:24 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-/* 
-Parsing needs to be nearly done to init window.
-It’s too early for MLX. Ravi can implement the pure raycasting math
- (init_ray, DDA, perp dist) with no graphics calls, just using t_game + t_ray
- Goal: a set of functions that take t_game + screen_x and compute ray hit data only.
-*/
 
 static void	init_g_struct(t_game *game)
 {
