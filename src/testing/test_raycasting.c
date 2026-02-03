@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/28 15:13:41 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/02 19:38:09 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/03 14:31:26 by ravi-bagin    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ void	key_hook(mlx_key_data_t keydata, void *param)
     game = (t_game *)param;
     if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
         mlx_close_window(game->mlx);
+}
+
+void game_loop(void *param)
+{
+    t_game *game = (t_game *)param;
+    t_ray ray;
+
+    handle_movement(game);
+    render_scene(game, &game->player, &ray);
 }
 
 // cc -o test_ray src/testing/test_raycasting.c src/raycasting.c -I includes -I libft -I MLX42/MLX42/include -L libft -lft -lm && ./test_ray
@@ -85,7 +94,9 @@ int	main(void)
     mlx_key_hook(game.mlx, key_hook, &game);
 
     // Start the loop
-    mlx_loop(game.mlx);
+    mlx_loop_hook(game.mlx, game_loop, &game);
+
+	mlx_loop(game.mlx);
 
     // Cleanup
     mlx_terminate(game.mlx);

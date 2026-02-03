@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/14 18:14:26 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/02 20:55:39 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/03 14:29:13 by ravi-bagin    ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,5 +179,8 @@ void	render_scene(t_game *game, t_player *player, t_ray *ray);
 //render.c
 uint32_t	get_wall_color(t_ray *ray);
 void	draw_vertical_line(t_game *game, int x, t_ray *ray);
+
+//player_movement.c
+void	handle_movement(t_game *game);
 
 #endif
