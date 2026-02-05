@@ -46,7 +46,9 @@ TEST_NAME = test_ray
 TEST_SRC = $(SRCDIR)/testing/test_raycasting.c \
 	$(SRCDIR)/raycasting.c \
 	$(SRCDIR)/render.c \
-	$(SRCDIR)/player_movement.c
+	$(SRCDIR)/player_movement_utils.c \
+	$(SRCDIR)/player_movement.c \
+	$(SRCDIR)/player_rotation.c
 TEST_INCLUDE = -I includes -I $(LIBFTDIR) -I $(MLXDIR)/include
 
 test: $(LIBFT) $(MLX_A)

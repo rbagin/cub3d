@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/14 18:14:26 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/03 14:29:13 by ravi-bagin    ########   odam.nl         */
+/*   Updated: 2026/02/05 18:17:08 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;	// Camera plane(perpendicular(90 degrees) to dir)
 	double	plane_y;
+	int32_t	last_mouse_x;
 }			t_player;
 
 /*	|RAY SETUP|
@@ -182,5 +183,11 @@ void	draw_vertical_line(t_game *game, int x, t_ray *ray);
 
 //player_movement.c
 void	handle_movement(t_game *game);
+
+//player_movement_utils.c
+bool	is_valid_position(t_game *game, double x, double y);
+
+//player_rotation.c
+void	handle_rotation(t_game *game);
 
 #endif
