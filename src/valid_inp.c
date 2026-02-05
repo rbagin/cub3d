@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 17:43:33 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/02 20:19:43 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/05 13:44:12 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,36 +22,34 @@ void	check_identif(t_game *g)
 
 void	init_player(t_game *g, char orient, int x, int y)
 {
-	g->map.player_p.x = x + 0.5;
-	g->map.player_p.y = y + 0.5;
-	g->player.pos_x = g->map.player_p.x;
-	g->player.pos_y = g->map.player_p.y;
+	g->map.player.x = x + 0.5;
+	g->map.player.y = y + 0.5;
 	if (orient == 'N')
 	{
-		g->player.dir_x = 0;
-		g->player.dir_y = -1;
+		g->player.dir_x = 0.0;
+		g->player.dir_y = -1.0;
 		g->player.plane_x = 0.66;
 		g->player.plane_y = 0;
 	}
 	else if (orient == 'S')
 	{
-		g->player.dir_x = 0;
-		g->player.dir_y = 1;
+		g->player.dir_x = 0.0;
+		g->player.dir_y = 1.0;
 		g->player.plane_x = -0.66;
-		g->player.plane_y = 0;
+		g->player.plane_y = 0.0;
 	}
 	else if (orient == 'E')
 	{
-		g->player.dir_x = 1;
-		g->player.dir_y = 0;
-		g->player.plane_x = 0;
+		g->player.dir_x = 1.0;
+		g->player.dir_y = 0.0;
+		g->player.plane_x = 0.0;
 		g->player.plane_y = 0.66;
 	}
 	else if (orient == 'W')
 	{
-		g->player.dir_x = -1;
-		g->player.dir_y = 0;
-		g->player.plane_x = 0;
+		g->player.dir_x = -1.0;
+		g->player.dir_y = 0.0;
+		g->player.plane_x = 0.0;
 		g->player.plane_y = -0.66;
 	}
 }
@@ -75,13 +73,17 @@ void	find_spawn(t_game *g)
 			{
 				count++;
 				init_player(g, c, x, y);
-				c = '0';
+				game->map.grid[y][x] = '0';
 			}
 			else if (c == '0' || c == '1' || c == ' ')
-				continue ;
+			{
+				//valid map char
+			}
 			else
 				print_exit(ERR_MAP_CHARS, g, true);
+			x++;
 		}
+		y++;
 	}
 	if (count != 1)
 		print_exit(ERR_MAP_SPAWN, g, true);
