@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/28 15:13:41 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/05 12:52:24 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/05 18:21:59 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	main(void)
 	game.player.dir_y = -1.0;
 	game.player.plane_x = 0.66;
 	game.player.plane_y = 0.0;
+	game.player.last_mouse_x = SCREEN_WIDTH / 2;
 
     // Initialize MLX42
     game.mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3d Test", true);

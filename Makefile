@@ -57,6 +57,7 @@ test: $(LIBFT) $(MLX_A)
 
 test_clean:
 	@rm -f $(TEST_NAME)
+	@make -C $(LIBFTDIR)  fclean --no-print-directory
 
 re: fclean all
 .PHONY: all clean fclean re libft test test_clean

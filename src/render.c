@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/02 20:54:03 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/02 21:13:06 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/05 19:55:24 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,24 @@ uint32_t	get_wall_color(t_ray *ray)
 			return (S_COLOR);
 	}
 }
+
+// static int	get_texture_index(t_ray *ray)
+// {
+// 	if (ray->side == 0)
+// 	{
+// 		if (ray->step_x == 1)
+// 			return (TEX_W);
+// 		else
+// 			return (TEX_E);
+// 	}
+// 	else
+// 	{
+// 		if (ray->step_y == 1)
+// 			return (TEX_N);
+// 		else
+// 			return (TEX_S);
+// 	}
+// }
 
 static void	draw_ceiling_floor(t_game *game, int x, t_ray *ray)
 {

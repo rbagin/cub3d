@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/14 18:14:26 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/05 18:17:08 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/05 19:12:37 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ typedef	struct s_ray
 	int		line_height;		// height of wall line to draw
 	int		draw_start;			// lowest pixel to draw
 	int		draw_end;			// highest pixel to draw
+	double	wall_x;
+	int		tex_x;
 }			t_ray;
 
 typedef	struct	s_map
