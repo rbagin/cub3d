@@ -6,22 +6,16 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 16:29:24 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/01/25 18:17:53 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/03 20:00:24 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-/* 
-Parsing needs to be nearly done to init window.
-It’s too early for MLX. Ravi can implement the pure raycasting math
- (init_ray, DDA, perp dist) with no graphics calls, just using t_game + t_ray
- Goal: a set of functions that take t_game + screen_x and compute ray hit data only.
-*/
 
 static void	init_g_struct(t_game *game)
 {
 	ft_bzero(game, sizeof(*game));
-	game->screen_w = 1280;
+	game->screen_w = SCREEN_WIDTH;
 	game->screen_h = 720;
 }
 
@@ -32,7 +26,7 @@ int	main(int argc, char const *argv[])
 		return (print_exit(ERR_ARGS, NULL, false), 1);
 	init_g_struct(&game);
 	if (!load_map(&game, argv[1]))
-		return (EXIT_FAILURE);
+		return (cleanup(&game), 1);
 	//validation (map closed/ 1spawn / all ids present / rgb valid)
 	// if (!valid_cub(&game))
 	// 	return (cleanup(&game), 1);
@@ -44,6 +38,6 @@ int	main(int argc, char const *argv[])
 	//render
 	//raycast walls
 	//movement rotation hooks+loop
-	celanup(&game);
+	// celanup(&game);
 	return (0);
 }

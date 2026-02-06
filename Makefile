@@ -1,17 +1,26 @@
 NAME = cub3D
 SRCDIR = src
 OBJDIR = obj
-INCDIR = include
+INCDIR = includes
 MLXDIR = MLX42/MLX42
 LIBFTDIR = ./libft
-SRC_F = init.c cleanup.c main.c \
-       map_load.c \
-       map_check.c \
-       utils.c \
-       path.c \
-       render.c \
-       hooks.c \
-       player.c
+SRC_F = cleanup.c \
+		grid.c \
+		hooks.c \
+		init_game.c \
+		main.c \
+		map_load.c \
+		map_check.c \
+		player_movement_utils.c \
+		player_movement.c \
+		player_rotation.c \
+		utils.c \
+		raycasting.c \
+		render.c \
+		rgb.c \
+		split_pars.c \
+		start_player.c \
+		utils_pars.c
 SRCS = $(addprefix $(SRCDIR)/, $(SRC_F))
 OBJS = $(addprefix $(OBJDIR)/, $(SRC_F:.c=.o))
 INCLUDE = -I$(INCDIR) -I$(MLXDIR)/include -I$(LIBFTDIR) -I./

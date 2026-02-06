@@ -15,7 +15,9 @@
 
 //error messages
 # define ERR_ARGS "Error\nIncorrect number of arguments"
+# define ERR_HEAD_CH "Error\nIncorrct identifier in header"
 # define ERR_MAP_CHARS "Error\nInvalid characters in map"
+# define ERR_MAP_SPAWN "Error\nMap must contain exactly one spawn"
 # define ERR_MAP_RECT "Error\nMap is not rectangular"
 # define ERR_MAP_WALLS "Error\nMap is not surrounded by walls"
 # define ERR_MAP_EXT "Error\nMap file must have .cub extension"
@@ -23,13 +25,13 @@
 # define ERR_MEMORY "Error\nMemory allocation failed"
 # define ERR_MLX "Error\nMLX initialization failed"
 # define ERR_MAP_EMPTY "Error\nMAP file is invalid"
-
-# define NO
-# define SO
-# define EA
-# define WE
-# define F
-# define C
+//.cub identifiers
+# define NO "NO"
+# define SO "SO"
+# define EA "EA"
+# define WE "WE"
+# define F "F"
+# define C "C"
 
 # define PLAYER_N 'N'
 # define PLAYER_S 'S'
