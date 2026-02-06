@@ -26,3 +26,14 @@
 // 	}
 // 	free(lines);
 // }
+void	print_exit(const char *errmsg, t_game *game, bool do_cleanup)
+{
+	if (errmsg)
+	{
+		ft_putstr_fd((char *)errmsg, STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
+	}
+	if (do_cleanup && game)
+		final_cleanup(game);
+	exit(do_cleanup);
+}
