@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/23 16:22:59 by imutavdz      #+#    #+#                 */
-/*   Updated: 2026/02/02 19:36:25 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/06 19:10:07 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # define ERR_ARGS "Error\nIncorrect number of arguments"
 # define ERR_HEAD_CH "Error\nIncorrct identifier in header"
 # define ERR_MAP_CHARS "Error\nInvalid characters in map"
+# define ERR_MAP_EMPTY_LN "Error\n"
+# define ERR_MAP_LN "Error\n"
 # define ERR_MAP_SPAWN "Error\nMap must contain exactly one spawn"
 # define ERR_MAP_RECT "Error\nMap is not rectangular"
 # define ERR_MAP_WALLS "Error\nMap is not surrounded by walls"

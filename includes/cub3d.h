@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/14 18:14:26 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/06 19:06:09 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/06 19:07:44 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ typedef	struct	s_game
 
 	t_color			color;
 	t_texpath		paths;
-	t_tex			tex[4];
+	t_texset			tex[4];
 	t_input			inp; //global game state
 	int				screen_w;
 	int				screen_h;
