@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/02 20:54:03 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/05 19:55:24 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/06 19:43:02 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ static void	draw_ceiling_floor(t_game *game, int x, t_ray *ray)
 	y = 0;
 	while (y < ray->draw_start)
 	{
-		mlx_put_pixel(game->frame.img, x, y, CEILING_COLOR);
+		mlx_put_pixel(game->frame, x, y, CEILING_COLOR);
 		y++;
 	}
 	y = ray->draw_end;
 	while (y < SCREEN_HEIGHT)
 	{
-		mlx_put_pixel(game->frame.img, x, y, FLOOR_COLOR);
+		mlx_put_pixel(game->frame, x, y, FLOOR_COLOR);
 		y++;
 	}
 }
@@ -76,7 +76,7 @@ void	draw_vertical_line(t_game *game, int x, t_ray *ray)
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		mlx_put_pixel(game->frame.img, x, y, color);
+		mlx_put_pixel(game->frame, x, y, color);
 		y++;
 	}
 }

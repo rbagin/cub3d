@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/14 18:14:26 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/06 19:07:44 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/06 19:42:00 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;	// Camera plane(perpendicular(90 degrees) to dir)
 	double	plane_y;
+	double	last_mouse_x;
 }			t_player;
 
 typedef	struct s_ray
@@ -94,8 +95,6 @@ typedef	struct	s_map
 typedef	struct	s_img
 {
 	mlx_texture_t	*img;
-	char			*addr;
-	int				bits_per_pixel;
 	int				width;
 	int				height;
 }			t_img;
@@ -145,12 +144,21 @@ typedef	struct	s_game
 	int				screen_h;
 }	t_game;
 
+//rgb.c
+bool	parse_rgb(const char *s, int *out_color);
+
+//cleanup.c
+void	print_exit(const char *errmsg, t_game *game, bool do_cleanup);
+void	free_lines(char **lines);
+
 //parsing map
 bool	load_map(t_game *g, const char *filename);
 bool	is_blank_line(const char *line);
 bool	is_map_line(const char *line);
 int	parse_header(char **lines, t_game *g);
 char	**split_lines(char *file_str, t_game *g);
+void	parse_map_grid(char **lines, int map_start, t_game *game);
+void	find_spawn(t_game *g);
 
 //raycasting.c
 void	cast_ray(t_player *player, t_map *map, t_ray *ray);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_load.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/25 17:43:12 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/06 18:49:18 by imutavdz         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   map_load.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/01/25 17:43:12 by imutavdz      #+#    #+#                 */
+/*   Updated: 2026/02/06 19:32:47 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*read_file(int fd, t_game *g)
 	return (full_str);
 }
 
-static bool	*valid_filname(const char *filename) //different input
+static bool	valid_filname(const char *filename) //different input
 {
 	char	*dot;
 
@@ -49,7 +49,9 @@ static bool	*valid_filname(const char *filename) //different input
 	dot = ft_strrchr(filename, '.');
 	if (!dot)
 		return (false);
-	return (ft_strncmp(dotm ".cub", 5) == 0);
+	if (ft_strncmp(dot, ".cub", 5) == 0)
+		return (true);
+	return (false);
 }
 
 static int	open_map(const char *name, t_game *g)
@@ -57,7 +59,7 @@ static int	open_map(const char *name, t_game *g)
 	int	fd;
 
 	if (!valid_filname(name))
-		print_exit(ERR_MAP_EXT);
+		print_exit(ERR_MAP_EXT, g, false);
 	fd = open(name, O_RDONLY);
 	if (fd < 0)
 		print_exit(ERR_MAP_OPEN, g, false);
@@ -80,11 +82,11 @@ bool	load_map(t_game *g, const char *filename)
 	fd = open_map(filename, g);
 	content = read_file(fd, g);
 	close(fd);
-	lines = split_lines(content, game);
+	lines = split_lines(content, g);
 	free(content);
 	m_start = parse_header(lines, g);
 	check_identif(g);
-	parse_grid(lines, m_start, g);
+	parse_map_grid(lines, m_start, g);
 	find_spawn(g);
 	free_lines(lines);
 	return (true);

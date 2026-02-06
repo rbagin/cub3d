@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/23 16:22:59 by imutavdz      #+#    #+#                 */
-/*   Updated: 2026/02/06 19:10:07 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/06 19:31:22 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define ERR_MEMORY "Error\nMemory allocation failed"
 # define ERR_MLX "Error\nMLX initialization failed"
 # define ERR_MAP_EMPTY "Error\nMAP file is invalid"
+# define ERR_NO_TEX_ID "Error\n"
 //.cub identifiers
 # define NO "NO"
 # define SO "SO"

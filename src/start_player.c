@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   start_player.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/25 17:43:33 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/06 18:49:53 by imutavdz         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   start_player.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/01/25 17:43:33 by imutavdz      #+#    #+#                 */
+/*   Updated: 2026/02/06 19:25:20 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 void	init_player(t_game *g, char orient, int x, int y)
 {
-	g->map.player.x = x + 0.5;
-	g->map.player.y = y + 0.5;
+	g->player.pos.x = x + 0.5;
+	g->player.pos.y = y + 0.5;
 	if (orient == 'N')
 	{
 		g->player.dir_x = 0.0;

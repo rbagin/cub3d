@@ -4,8 +4,7 @@ OBJDIR = obj
 INCDIR = includes
 MLXDIR = MLX42/MLX42
 LIBFTDIR = ./libft
-SRC_F = cleanup.c \
-		grid.c \
+SRC_F = grid.c \
 		hooks.c \
 		init_game.c \
 		main.c \
@@ -14,12 +13,12 @@ SRC_F = cleanup.c \
 		player_movement_utils.c \
 		player_movement.c \
 		player_rotation.c \
-		utils.c \
 		raycasting.c \
 		render.c \
 		rgb.c \
 		split_pars.c \
 		start_player.c \
+		cleanup.c \
 		utils_pars.c
 SRCS = $(addprefix $(SRCDIR)/, $(SRC_F))
 OBJS = $(addprefix $(OBJDIR)/, $(SRC_F:.c=.o))

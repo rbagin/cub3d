@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_check.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/25 17:42:59 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/06 18:47:57 by imutavdz         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   map_check.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/01/25 17:42:59 by imutavdz      #+#    #+#                 */
+/*   Updated: 2026/02/06 19:38:50 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	parse_color_line(const char *line, t_game *g)
 
 bool	set_tex_path(char **dst, const char *path_pt)
 {
-	char	**trim;
+	char	*trim;
 
 	if (*dst != NULL)
 		return (false);

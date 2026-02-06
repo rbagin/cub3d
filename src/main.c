@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 16:29:24 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/03 20:00:24 by imutavdz         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/01/23 16:29:24 by imutavdz      #+#    #+#                 */
+/*   Updated: 2026/02/06 19:27:33 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,21 @@ static void	init_g_struct(t_game *game)
 {
 	ft_bzero(game, sizeof(*game));
 	game->screen_w = SCREEN_WIDTH;
-	game->screen_h = 720;
+	game->screen_h = SCREEN_HEIGHT;
 }
 
 int	main(int argc, char const *argv[])
 {
+	t_game	*game;
+
+	game = NULL;
 	//parsing (reads file + fills paths/color/map/player)
 	if (argc != 2)
 		return (print_exit(ERR_ARGS, NULL, false), 1);
-	init_g_struct(&game);
-	if (!load_map(&game, argv[1]))
-		return (cleanup(&game), 1);
+	init_g_struct(game);
+	if (!load_map(game, argv[1]))
+		// return (cleanup(game), 1);
+		return (1);
 	//validation (map closed/ 1spawn / all ids present / rgb valid)
 	// if (!valid_cub(&game))
 	// 	return (cleanup(&game), 1);
