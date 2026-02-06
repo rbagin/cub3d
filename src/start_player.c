@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   valid_inp.c                                        :+:      :+:    :+:   */
+/*   start_player.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 17:43:33 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/05 13:44:12 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/06 18:49:53 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*(For colors, best is to add flags later: bool has_floor; bool has_ceiling;)*/
 
 #include "cub3d.h"
-
-void	check_identif(t_game *g)
-{
-	if (!g->paths.no || !g->paths.so || !g->paths.we || !g->paths.ea)
-		print_exit(ERR_NO_TEX_ID, g, true);
-}
 
 void	init_player(t_game *g, char orient, int x, int y)
 {

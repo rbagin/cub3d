@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   rgb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:26:31 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/06 17:28:33 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/06 18:48:25 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static bool	parse_single_value(const char *str, int *value, char **next)
 	*next = (char *)str;
 	return (true);
 }
-
 
 bool	parse_rgb(const char *s, int *out_color)
 {
@@ -66,13 +65,4 @@ bool	parse_rgb(const char *s, int *out_color)
 		return (false);
 	*out_color = (r << 16) | (g << 8) | b;
 	return (true);
-}
-
-bool	parse_color_line(const char *line, t_game *g)
-{
-	if (ft_strncmp(line, "F", 2) == 0)
-		return (parse_rgb(line + 2, &g->color.floor));
-	if (ft_strncmp(line, "C", 2) == 0)
-		return (parse_rgb(line + 2, &g->color.ceiling));
-	return (false);
 }
