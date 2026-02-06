@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:26:31 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/06 18:48:25 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/06 19:53:13 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,13 @@ bool	parse_rgb(const char *s, int *out_color)
 	int		r;
 	int		g;
 	int		b;
+	int		a;
 	char	*next;
 
+	a = 255;
 	if (!s || !out_color)
+		return (false);
+	if (!parse_single_value(s, &r, &next))
 		return (false);
 	while (*next == ' ' || *next == '\t')
 		next++;
@@ -63,6 +67,6 @@ bool	parse_rgb(const char *s, int *out_color)
 		next++;
 	if (*next != '\0')
 		return (false);
-	*out_color = (r << 16) | (g << 8) | b;
+	*out_color = (r << 24) | (g << 16) | (b << 8) | a;
 	return (true);
 }
