@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/14 18:14:26 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/05 18:17:08 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/06 19:01:43 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # include "gnl.h"
 # include "macro.h"
 
+typedef struct s_pos
+{
+	double	x;	// position on the map
+	double	y;
+}	t_pos;
 
 /*input state (keys pressed) hooks set/unset
 loop reads every frame to move
@@ -84,12 +89,6 @@ typedef	struct	s_map
 } 	t_map;
 //A simple 2D coordinate in map-space (floating point so you can be between tiles).
 //x, y: player position in the grid coordinate system (tile units)
-typedef struct s_pos
-{
-	double	x;	// position on the map
-	double	y;
-}	t_pos;
-
 typedef	struct	s_img
 {
 	mlx_texture_t	*img;
