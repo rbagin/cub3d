@@ -146,5 +146,9 @@ typedef	struct	s_game
 
 //parsing map
 bool	load_map(t_game *g, const char *filename);
+bool	is_blank_line(const char *line);
+bool	is_map_line(const char *line);
+int	parse_header(char **lines, t_game *g);
+char	**split_lines(char *file_str, t_game *g);
 
 #endif
