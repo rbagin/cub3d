@@ -1,44 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   grid.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/06 17:31:24 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/06 17:44:03 by imutavdz         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   grid.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/02/06 17:31:24 by imutavdz      #+#    #+#                 */
+/*   Updated: 2026/02/06 19:21:22 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	calc_dim_map(char **lines, int m_start, int h, int w, t_game *g)
+static void	calc_dim_map(char **lines, int m_start, int *height, int *w, t_game *g)
 {
-	int	a;
-	int	b;
+	int	h;
 	int	len;
+	int	max_width;
 
-	a = 0;
-	b = 0;
-	while (lines[m_start])
+	h = 0;
+	max_width = 0;
+	while (lines[m_start + h])
 	{
-		if (is_blank_line(lines[m_start]))
+		if (is_blank_line(lines[m_start + h]))
 			print_exit(ERR_MAP_EMPTY_LN, g, true);
-		if (!is_map_line(lines[m_start]))
+		if (!is_map_line(lines[m_start + h]))
 			print_exit(ERR_MAP_LN, g, true);
 		len = (int)ft_strlen(lines[m_start]);
-		if (len > w)
-			b = len;
-		a++;
-		m_start++;
+		if (len > max_width)
+			max_width = len;
+		h++;
 	}
-	if (a == 0 || b == 0)
+	if (h == 0 || max_width == 0)
 		print_exit(ERR_MAP_EMPTY, g, true);
-	*h = a;
-	*w = b;
+	*height = h;
+	*w = max_width;
 }
 
-char	**create_map_grid(int **lines, int m_start, int *height, int *width,  t_game *g)
+char	**create_map_grid(char **lines, int m_start, int h, int w,  t_game *g)
 {
 	int		y;
 	int		x;
@@ -48,37 +47,37 @@ char	**create_map_grid(int **lines, int m_start, int *height, int *width,  t_gam
 	if (!grid)
 		print_exit(ERR_MEMORY, g, true);
 	y = 0;
-	while (y < height)
+	while (y < h)
 	{
-		grid[y] = malloc(width + 1);
+		grid[y] = malloc(w + 1);
 		if (!grid[y])
 			print_exit(ERR_MEMORY, g, true);
 		x = 0;
-		while (x < width)
+		while (x < w)
 		{
 			grid[y][x] = ' ';
 			x++;
 		}
 		grid[y][x] = '\0';
 		x = 0;
-		while (lines[m_start + y][x] && x < width)
+		while (lines[m_start + y][x] && x < w)
 		{
 			grid[y][x] = lines[m_start + y][x];
 			x++;
 		}
 		y++;
 	}
-	grid[height] = NULL;
+	grid[h] = NULL;
 	return (grid);
 }
 
-void	parse_map_grid(char **lines, int map_start, t_game *g)
+void	parse_map_grid(char **lines, int map_start, t_game *game)
 {
 	int	h;
 	int	w;
 
-	calc_dim_map(lines, map_start, &h, &w, g);
-	game->map.grid = create_map_grid(lines, map_start, h, w, g);
+	calc_dim_map(lines, map_start, &h, &w, game);
+	game->map.grid = create_map_grid(lines, map_start, h, w, game);
 	game->map.height = h;
 	game->map.width = w;
 }
