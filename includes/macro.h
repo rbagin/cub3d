@@ -6,12 +6,12 @@
 /*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/23 16:22:59 by imutavdz      #+#    #+#                 */
-/*   Updated: 2026/02/06 19:31:22 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/06 20:07:36 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAKRO_H
-# define MAKRO_H
+#ifndef MACRO_H
+# define MACRO_H
 
 //error messages
 # define ERR_ARGS "Error\nIncorrect number of arguments"

@@ -3,32 +3,56 @@
 /*                                                        ::::::::            */
 /*   ft_strtrim.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
+/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/10 17:07:59 by yneshev       #+#    #+#                 */
-/*   Updated: 2024/10/24 19:28:54 by yneshev       ########   odam.nl         */
+/*   Created: 2024/10/14 14:03:40 by rbagin        #+#    #+#                 */
+/*   Updated: 2024/10/21 14:14:13 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	to_be_trimmed(char const *s1, char const *set, int *start, int *end)
+{
+	*start = 0;
+	*end = (int)ft_strlen(s1) - 1;
+	while (s1[*start] != '\0')
+	{
+		if (ft_strchr(set, s1[*start]) != NULL)
+			(*start)++;
+		else
+			break ;
+	}
+	while (*end > *start)
+	{
+		if (ft_strchr(set, s1[*end]) != NULL)
+			(*end)--;
+		else
+			break ;
+	}
+	return (0);
+}
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*res;
 	int		start;
 	int		end;
 
-	start = 0;
-	if (!s1)
+	if (!s1 || !set)
 		return (NULL);
-	while (s1[start] && ft_strchr(set, s1[start]))
-		start++;
-	end = ft_strlen(s1);
-	while (end > start && ft_strchr(set, s1[end - 1]))
-		end--;
-	res = malloc(end - start + 1);
-	if (res == NULL)
-		return (NULL);
-	ft_strlcpy(res, s1 + start, end - start + 1);
-	return (res);
+	to_be_trimmed(s1, set, &start, &end);
+	return (ft_substr(s1, start, end - start + 1));
 }
+
+// #include <stdio.h>
+
+// int main(void)
+// {
+// 	char *s1 = "aabcbaa";
+// 	char *set = "ab";
+// 	printf("%s\n", ft_strtrim(s1, set));
+// 	return (0);
+// }
+
+// cc -Wall -Wextra -Werror ft_strchr.c ft_strlen.c ft_substr.c ft_strdup.c
+// ft_strtrim.c -o test

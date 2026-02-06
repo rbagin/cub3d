@@ -6,13 +6,14 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/05 10:33:18 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/05 19:56:48 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/06 20:36:01 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 #define ROTATION_SPEED 3.0
+#define MOUSE_S 0.0015
 
 void	rotate_left(t_game *game, t_player *player)
 {
@@ -68,7 +69,7 @@ void	rotate_mouse(t_game *game, t_player *player)
 		player->last_mouse_x = mouse_x;
 		return ;
 	}
-	rotation_angle = delta_x * 0.002;
+	rotation_angle = delta_x * MOUSE_S;
 	old_dir_x = player->dir_x;
 	player->dir_x = player->dir_x * cos(rotation_angle)
 		- player->dir_y * sin(rotation_angle);

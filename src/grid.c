@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 17:31:24 by imutavdz      #+#    #+#                 */
-/*   Updated: 2026/02/06 19:21:22 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/06 20:06:19 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	calc_dim_map(char **lines, int m_start, int *height, int *w, t_game 
 			print_exit(ERR_MAP_EMPTY_LN, g, true);
 		if (!is_map_line(lines[m_start + h]))
 			print_exit(ERR_MAP_LN, g, true);
-		len = (int)ft_strlen(lines[m_start]);
+		len = (int)ft_strlen(lines[m_start + h]);
 		if (len > max_width)
 			max_width = len;
 		h++;

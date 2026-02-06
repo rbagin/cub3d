@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_lstiter.c                                       :+:    :+:            */
+/*   handle_str.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
+/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/23 19:29:24 by yneshev       #+#    #+#                 */
-/*   Updated: 2024/10/24 17:51:49 by yneshev       ########   odam.nl         */
+/*   Created: 2024/11/11 15:13:04 by rbagin        #+#    #+#                 */
+/*   Updated: 2025/04/16 16:39:53 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+int	handle_str(char *s)
 {
-	if (!f || !lst)
-		return ;
-	while (lst)
+	if (!s)
 	{
-		f(lst->content);
-		lst = lst->next;
+		ft_putstr_fd("(null)", 1);
+		return (6);
 	}
+	ft_putstr_fd(s, 1);
+	return (ft_strlen(s));
 }

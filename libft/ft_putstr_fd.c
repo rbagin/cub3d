@@ -3,23 +3,22 @@
 /*                                                        ::::::::            */
 /*   ft_putstr_fd.c                                     :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
+/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/10 17:38:08 by yneshev       #+#    #+#                 */
-/*   Updated: 2024/10/24 19:25:31 by yneshev       ########   odam.nl         */
+/*   Created: 2024/10/14 14:06:07 by rbagin        #+#    #+#                 */
+/*   Updated: 2025/03/10 13:10:00 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*	Outputs given string onto given file descriptor
+	fd 0 = Standard input (keyboard)
+	fd 1 = Standard output (terminal)
+	fd 2 = Standard error (error output)
+	fd 3+ = Other files/sockets
+	Uses ft_strlen*/
 void	ft_putstr_fd(char *s, int fd)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
+	write(fd, s, ft_strlen(s));
 }

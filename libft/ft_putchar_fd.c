@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_putchar_fd.c                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
+/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/10 17:34:58 by yneshev       #+#    #+#                 */
-/*   Updated: 2024/10/24 19:25:09 by yneshev       ########   odam.nl         */
+/*   Created: 2024/10/14 14:05:09 by rbagin        #+#    #+#                 */
+/*   Updated: 2024/10/14 15:07:51 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

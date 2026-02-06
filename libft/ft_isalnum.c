@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_isalnum.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
+/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/08 12:36:46 by yneshev       #+#    #+#                 */
-/*   Updated: 2024/10/24 19:22:34 by yneshev       ########   odam.nl         */
+/*   Created: 2024/10/09 17:30:44 by rbagin        #+#    #+#                 */
+/*   Updated: 2024/10/14 16:57:32 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,17 @@
 
 int	ft_isalnum(int c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		return (1);
-	else if (c >= '0' && c <= '9')
-		return (1);
-	else
+	if ((c < 'A' || c > 'Z') && (c < 'a' || c > 'z') && (c < '0' || c > '9'))
+	{
 		return (0);
+	}
+	return (1);
 }
+
+// #include <stdio.h>
+
+// int main(void)
+// {
+// 	int c = '5';
+// 	printf("Testing : %d\n", ft_isalnum(c));
+// }

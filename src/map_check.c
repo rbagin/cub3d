@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/25 17:42:59 by imutavdz      #+#    #+#                 */
-/*   Updated: 2026/02/06 19:38:50 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/06 20:07:21 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 bool	parse_color_line(const char *line, t_game *g)
 {
-	if (ft_strncmp(line, "F", 2) == 0)
+	if (ft_strncmp(line, "F ", 2) == 0)
 		return (parse_rgb(line + 2, &g->color.floor));
-	if (ft_strncmp(line, "C", 2) == 0)
+	if (ft_strncmp(line, "C ", 2) == 0)
 		return (parse_rgb(line + 2, &g->color.ceiling));
 	return (false);
 }

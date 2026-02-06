@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/25 17:43:33 by imutavdz      #+#    #+#                 */
-/*   Updated: 2026/02/06 19:25:20 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/06 19:55:48 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	find_spawn(t_game *g)
 			{
 				count++;
 				init_player(g, c, x, y);
-				game->map.grid[y][x] = '0';
+				g->map.grid[y][x] = '0';
 			}
 			else if (c == '0' || c == '1' || c == ' ')
 			{

@@ -6,13 +6,13 @@
 /*   By: ravi-bagin <ravi-bagin@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/03 13:13:21 by ravi-bagin    #+#    #+#                 */
-/*   Updated: 2026/02/05 19:05:15 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/06 20:31:50 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-#define SPEED 3
+#define SPEED 1
 
 void	move_forward(t_game *game, t_player *player)
 {
