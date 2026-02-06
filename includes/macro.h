@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   macro.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/23 16:22:59 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/03 20:03:45 by imutavdz         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   macro.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/01/23 16:22:59 by imutavdz      #+#    #+#                 */
+/*   Updated: 2026/02/02 19:36:25 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define ERR_MAP_OPEN "Error\nCould not open map file"
 # define ERR_MEMORY "Error\nMemory allocation failed"
 # define ERR_MLX "Error\nMLX initialization failed"
-# define ERR_MAP_EMPTY "Error\nNo map found"
+# define ERR_MAP_EMPTY "Error\nMAP file is invalid"
 //.cub identifiers
 # define NO "NO"
 # define SO "SO"
@@ -37,5 +37,18 @@
 # define PLAYER_S 'S'
 # define PLAYER_W 'W'
 # define PLAYER_E 'E'
+
+# define SCREEN_WIDTH 1280
+# define SCREEN_HEIGHT 720
+# define FOV_SCALE 66
+
+# define CREATE_RGBA(r, g, b, a) ((r) << 24 | (g) << 16 | (b) << 8 | (a))
+
+# define N_COLOR CREATE_RGBA(167, 17, 17, 255)
+# define S_COLOR CREATE_RGBA(26, 214, 26, 255)
+# define E_COLOR CREATE_RGBA(2, 47, 226, 255)
+# define W_COLOR CREATE_RGBA(192, 244, 5, 255)
+# define FLOOR_COLOR CREATE_RGBA(0, 0, 0, 255)
+# define CEILING_COLOR CREATE_RGBA(255,255,255, 255)
 
 #endif
