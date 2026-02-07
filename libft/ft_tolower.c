@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   tolower.c                                          :+:    :+:            */
+/*   ft_tolower.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
+/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/10 14:36:52 by rbagin        #+#    #+#                 */
-/*   Updated: 2024/10/10 20:17:43 by rbagin        ########   odam.nl         */
+/*   Created: 2024/10/08 13:47:01 by yneshev       #+#    #+#                 */
+/*   Updated: 2024/10/24 19:29:07 by yneshev       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
-	{
-		return (c + 32);
-	}
+		c += 32;
 	return (c);
 }

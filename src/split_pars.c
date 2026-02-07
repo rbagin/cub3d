@@ -6,12 +6,15 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:44:27 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/06 18:45:33 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/07 12:07:49 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+//where and when do I free this line??
 #include "cub3d.h"
-
+//count_lines - Count number of lines in string
+//str: Newline-separated string
+// If string doesn't end with newline, we have one more line
+//Returns: Number of lines (counts newlines + 1 if no trailing newline)
 static int	count_lines(const char *str)
 {
 	int	count;
@@ -29,6 +32,9 @@ static int	count_lines(const char *str)
 		count++;
 	return (count);
 }
+//Extract one line from position, allocate and copy it
+//End of line (points to '\n' or '\0')
+// Allocated string containing the line (without '\n'), or NULL on error
 
 static char	*extract_line(const char *start, const char *end)
 {
@@ -49,6 +55,11 @@ static char	*extract_line(const char *start, const char *end)
 	line[i] = '\0';
 	return (line);
 }
+//Split file content by newlines into array of strings
+//Each line is a separate allocated string.
+//Returns: NULL-terminated array of strings, or exits on error
+//lines = alloc array of str pointers
+// Handle last line if no trailing newline
 
 char	**split_lines(char *file_str, t_game *g)
 {
@@ -81,7 +92,7 @@ char	**split_lines(char *file_str, t_game *g)
 		}
 		curr++;
 	}
-	if (start < curr && *(curr -1) != '\n')
+	if (start < curr && *(curr - 1) != '\n')
 	{
 		lines[i] = extract_line(start, curr);
 		if (!lines[i])

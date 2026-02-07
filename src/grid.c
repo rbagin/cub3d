@@ -11,73 +11,85 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+//Calculate height and max width of map
+//calc_dim_map exits on blank lines, but the subject allows trailing empty 
+//lines after the map—you should stop at first blank after map start
 
-static void	calc_dim_map(char **lines, int m_start, int *height, int *w, t_game *g)
+static void	calc_dim_map(char **lines, int m_start, int *h, int *w, t_game *g)
 {
-	int	h;
-	int	len;
-	int	max_width;
+	int		height;
+	int		max_width;
+	int		len;
 
-	h = 0;
+	height = 0;
 	max_width = 0;
-	while (lines[m_start + h])
+	while (lines[m_start + height])
 	{
-		if (is_blank_line(lines[m_start + h]))
-			print_exit(ERR_MAP_EMPTY_LN, g, true);
-		if (!is_map_line(lines[m_start + h]))
+		if (is_blank_line(lines[m_start + height]))
+			break ; // Don't error yet. Valid will handle if map is too small.
+		if (!is_map_line(lines[m_start + height]))
 			print_exit(ERR_MAP_LN, g, true);
-		len = (int)ft_strlen(lines[m_start + h]);
+		len = ft_strlen(lines[m_start + height]); //do we need int cast?
 		if (len > max_width)
 			max_width = len;
-		h++;
+		height++;
 	}
-	if (h == 0 || max_width == 0)
+	if (height == 0 || max_width == 0)
 		print_exit(ERR_MAP_EMPTY, g, true);
-	*height = h;
+	*h = height;
 	*w = max_width;
 }
 
-char	**create_map_grid(char **lines, int m_start, int h, int w,  t_game *g)
+//handles the horisontal chars in a row
+
+static void	fill_row(char *grid_row, char *line, int w)
+{
+	int	x;
+
+	x = 0;
+	while (x < w) // Fill width with spaces (default for short lines)
+	{
+		grid_row[x] = ' ';
+		x++;
+	}
+	grid_row[x] = '\0';
+	x = 0; // overwrite start row with actual line content
+	while (line[x] && x < w)
+	{
+		grid_row[x] = line[x];
+		x++;
+	}
+}
+//Convert map lines to rectangular 2D grid
+//handles vertical rows
+//Returns: Allocated 2D char array (rectangular, space-padded)
+static char	**create_grid(char **lines, int m_start, t_game *g)
 {
 	int		y;
-	int		x;
 	char	**grid;
 
-	grid = malloc(sizeof(char *) * (h + 1));
+	grid = malloc(sizeof(char *) * (g->map.height + 1));
 	if (!grid)
 		print_exit(ERR_MEMORY, g, true);
 	y = 0;
-	while (y < h)
+	while (y < g->map.height)
 	{
-		grid[y] = malloc(w + 1);
+		grid[y] = malloc(g->map.width + 1); //alloc row
 		if (!grid[y])
+		{
+			grid[y] = NULL; //nul term for partial cleanup
 			print_exit(ERR_MEMORY, g, true);
-		x = 0;
-		while (x < w)
-		{
-			grid[y][x] = ' ';
-			x++;
 		}
-		grid[y][x] = '\0';
-		x = 0;
-		while (lines[m_start + y][x] && x < w)
-		{
-			grid[y][x] = lines[m_start + y][x];
-			x++;
-		}
+		fill_row(grid[y], lines[m_start + y], g->map.width); //pass specif row and src line
 		y++;
 	}
 	grid[h] = NULL;
 	return (grid);
 }
-
-void	parse_map_grid(char **lines, int map_start, t_game *game)
+//Parse map section into 2D grid
+//init alloc
+void	parse_map_grid(char **lines, int map_start, t_game *g)
 {
-	int	h;
-	int	w;
-
-	calc_dim_map(lines, map_start, &h, &w, game);
-	game->map.grid = create_map_grid(lines, map_start, h, w, game);
-	game->map.height = h;
-	game->map.width = w;
+	calc_dim_map(lines, map_start, &g->map.height, &g->map.width, g);
+	g->map.grid = create_grid(lines, map_start, g);
 }

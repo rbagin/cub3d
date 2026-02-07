@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   isdigit.c                                          :+:    :+:            */
+/*   ft_isdigit.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
+/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/09 17:28:33 by rbagin        #+#    #+#                 */
-/*   Updated: 2024/10/10 13:55:56 by rbagin        ########   odam.nl         */
+/*   Created: 2024/10/08 12:48:46 by yneshev       #+#    #+#                 */
+/*   Updated: 2024/10/24 19:22:55 by yneshev       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,8 @@
 
 int	ft_isdigit(int c)
 {
-	if (c < '0' || c > '9')
-	{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
 		return (0);
-	}
-	return (1);
 }
-
-// #include <stdio.h>
-// int main(void)
-// {
-// 	int c = '5';
-// 	printf("Testing : %d\n", ft_isdigit(c));
-// }

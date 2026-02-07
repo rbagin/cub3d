@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   isprint.c                                          :+:    :+:            */
+/*   ft_isprint.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
+/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/10 13:42:57 by rbagin        #+#    #+#                 */
-/*   Updated: 2024/10/10 13:56:01 by rbagin        ########   odam.nl         */
+/*   Created: 2024/10/08 12:55:34 by yneshev       #+#    #+#                 */
+/*   Updated: 2024/10/24 19:23:00 by yneshev       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,6 @@ int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)
 		return (1);
-	return (0);
+	else
+		return (0);
 }

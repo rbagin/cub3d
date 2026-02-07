@@ -1,31 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 18:51:43 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/07 11:46:12 by imutavdz         ###   ########.fr       */
+/*   Created: 2026/02/07 11:44:16 by imutavdz          #+#    #+#             */
+/*   Updated: 2026/02/07 12:16:53 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// t_input flags key press - update every move/rotate
-/* Input hooks (WASD movement)
-hooks + loop
-
-key press: set flags in g->inp
-
-key release: unset flags
-
-loop hook:
-
-compute dt
-
-update_player(g, dt) (movement+rotation+collision)
-
-render(g) (ceiling/floor + rays + textures)
-
-put image to window*/
+//Map validation (flood fill to ensure walls surround player)

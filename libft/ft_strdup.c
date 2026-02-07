@@ -3,44 +3,34 @@
 /*                                                        ::::::::            */
 /*   ft_strdup.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
+/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/10 15:01:11 by rbagin        #+#    #+#                 */
-/*   Updated: 2024/10/21 19:39:14 by rbagin        ########   odam.nl         */
+/*   Created: 2024/10/10 15:07:21 by yneshev       #+#    #+#                 */
+/*   Updated: 2024/10/24 19:29:46 by yneshev       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup(const char *s)
 {
-	int		i;
-	int		len;
-	char	*dest;
+	char	*r;
+	size_t	len;
+	char	*start;
 
-	i = 0;
-	len = 0;
-	while (src[len] != '\0')
-		len++;
-	dest = (char *)malloc(sizeof(*src) * (len + 1));
-	if (dest == NULL)
+	len = ft_strlen(s);
+	if (s == NULL)
 		return (NULL);
-	while (i < len && src[i] != '\0')
+	r = malloc(len + 1);
+	if (r == NULL)
+		return (NULL);
+	start = r;
+	while (*s)
 	{
-		dest[i] = src[i];
-		i++;
+		*r = *s;
+		r++;
+		s++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	*r = '\0';
+	return (start);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	char *src = "Hello World!";
-// 	char *dest = ft_strdup(src);
-// 	printf("%s\n", dest);
-// 	free(dest);
-// 	return (0);
-// }

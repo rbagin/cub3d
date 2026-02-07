@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 18:51:43 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/07 11:46:12 by imutavdz         ###   ########.fr       */
+/*   Created: 2026/01/02 15:27:57 by imutavdz          #+#    #+#             */
+/*   Updated: 2026/01/02 15:32:18 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-// t_input flags key press - update every move/rotate
-/* Input hooks (WASD movement)
-hooks + loop
+char	*ft_strndup(const char *s, size_t n)
+{
+	size_t	i;
+	char	*dup;
 
-key press: set flags in g->inp
-
-key release: unset flags
-
-loop hook:
-
-compute dt
-
-update_player(g, dt) (movement+rotation+collision)
-
-render(g) (ceiling/floor + rays + textures)
-
-put image to window*/
+	if (!s)
+		return (NULL);
+	dup = malloc(n + 1);
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (i < n && s[i])
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}

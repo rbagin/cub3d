@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+//Texture loading (load .png files into memory)
 bool	load_textures(t_game *game)
 {
 	game->tex[TEX_N].texture = mlx_load_png(game->paths.no);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   isascii.c                                          :+:    :+:            */
+/*   ft_isascii.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
+/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/10 13:55:29 by rbagin        #+#    #+#                 */
-/*   Updated: 2024/10/10 13:55:42 by rbagin        ########   odam.nl         */
+/*   Created: 2024/10/08 12:51:35 by yneshev       #+#    #+#                 */
+/*   Updated: 2024/10/24 19:22:48 by yneshev       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int	ft_isascii(int c)
 {
-	if (c < 0 || c > 127)
-	{
+	if (c >= 0 && c <= 127)
+		return (1);
+	else
 		return (0);
-	}
-	return (1);
 }

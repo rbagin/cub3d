@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_strchr.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
+/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/10 14:37:44 by rbagin        #+#    #+#                 */
-/*   Updated: 2024/10/19 16:12:34 by rbagin        ########   odam.nl         */
+/*   Created: 2024/10/08 17:34:33 by yneshev       #+#    #+#                 */
+/*   Updated: 2024/10/24 19:26:56 by yneshev       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,13 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
+	while (*s != '\0')
 	{
-		if (s[i] == (char)c)
-		{
-			return ((char *)&s[i]);
-		}
-		i++;
+		if (*s == (unsigned char)c)
+			return ((char *)s);
+		s++;
 	}
-	if ((char)c == '\0')
-		return ((char *)&s[i]);
+	if ((unsigned char)c == '\0')
+		return ((char *)s);
 	return (NULL);
 }
-
-// #include <string.h>
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	char *str = "Hello World!";
-// 	char *c = strchr(str, 'W');
-// 	printf("strchr Result: %s\n", c);
-// 	printf("ft_strchr Result: %s\n", ft_strchr(str, 'W'));
-// 	return (0);
-// }
-
-// The  strchr()  function returns a pointer to the first occurrence of the
-// character c in the
-//        string s.

@@ -119,6 +119,8 @@ typedef struct s_color
 {
 	int		floor;
 	int		ceiling;
+	bool	f_set;
+	bool	c_set;
 }			t_color;
 
 typedef struct s_texset
@@ -144,37 +146,41 @@ typedef	struct	s_game
 	int				screen_h;
 }	t_game;
 
+//start
+static int	init_mlx(t_game *game);
+static void	game_loop(void *param);
 //rgb.c
-bool	parse_rgb(const char *s, int *out_color);
+bool		parse_rgb(const char *s, int *out_color);
 
 //cleanup.c
-void	print_exit(const char *errmsg, t_game *game, bool do_cleanup);
-void	free_lines(char **lines);
+void		print_exit(const char *errmsg, t_game *game, bool do_cleanup);
+void		free_lines(char **lines);
+void		free_grid(char **grid);
 
 //parsing map
-bool	load_map(t_game *g, const char *filename);
-bool	is_blank_line(const char *line);
-bool	is_map_line(const char *line);
-int	parse_header(char **lines, t_game *g);
-char	**split_lines(char *file_str, t_game *g);
-void	parse_map_grid(char **lines, int map_start, t_game *game);
-void	find_spawn(t_game *g);
+bool		load_map(t_game *g, const char *filename);
+bool		is_blank_line(const char *line);
+bool		is_map_line(const char *line);
+int			parse_header(char **lines, t_game *g);
+char		**split_lines(char *file_str, t_game *g);
+void		parse_map_grid(char **lines, int map_start, t_game *game);
+void		find_spawn(t_game *g);
 
 //raycasting.c
-void	cast_ray(t_player *player, t_map *map, t_ray *ray);
-void	render_scene(t_game *game, t_player *player, t_ray *ray);
+void		cast_ray(t_player *player, t_map *map, t_ray *ray);
+void		render_scene(t_game *game, t_player *player, t_ray *ray);
 
 //render.c
 uint32_t	get_wall_color(t_ray *ray);
-void	draw_vertical_line(t_game *game, int x, t_ray *ray);
+void		draw_vertical_line(t_game *game, int x, t_ray *ray);
 
 //player_movement.c
-void	handle_movement(t_game *game);
+void		handle_movement(t_game *game);
 
 //player_movement_utils.c
-bool	is_valid_position(t_game *game, double x, double y);
+bool		is_valid_position(t_game *game, double x, double y);
 
 //player_rotation.c
-void	handle_rotation(t_game *game);
+void		handle_rotation(t_game *game);
 
 #endif

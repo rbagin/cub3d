@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 18:51:43 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/07 11:46:12 by imutavdz         ###   ########.fr       */
+/*   Created: 2025/12/30 23:45:09 by imutavdz          #+#    #+#             */
+/*   Updated: 2025/12/30 23:46:55 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-// t_input flags key press - update every move/rotate
-/* Input hooks (WASD movement)
-hooks + loop
+char	*ft_strcpy(char *dst, const char *src)
+{
+	char	*ret;
 
-key press: set flags in g->inp
-
-key release: unset flags
-
-loop hook:
-
-compute dt
-
-update_player(g, dt) (movement+rotation+collision)
-
-render(g) (ceiling/floor + rays + textures)
-
-put image to window*/
+	ret = dst;
+	while (*src)
+		*dst++ = *src++;
+	*dst = '\0';
+	return (ret);
+}

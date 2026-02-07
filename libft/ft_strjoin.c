@@ -3,40 +3,36 @@
 /*                                                        ::::::::            */
 /*   ft_strjoin.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
+/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/11 14:31:33 by rbagin        #+#    #+#                 */
-/*   Updated: 2024/10/15 13:00:58 by rbagin        ########   odam.nl         */
+/*   Created: 2024/10/10 15:50:21 by yneshev       #+#    #+#                 */
+/*   Updated: 2024/10/24 19:27:38 by yneshev       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
-	char	*str1;
-	char	*str2;
-	size_t	str_len;
+	int		len;
+	char	*res;
+	char	*start;
 
-	str1 = (char *)s1;
-	str2 = (char *)s2;
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
-	str_len = (ft_strlen(s1) + ft_strlen(s2)) + 1;
-	str = (char *)malloc(sizeof(char) * (str_len));
-	if (str == NULL)
+	if (!s1)
+		return (ft_strdup(s2));
+	if (!s2)
+		return (ft_strdup(s1));
+	len = ft_strlen(s1) + ft_strlen(s2);
+	res = malloc((size_t)len + 1);
+	if (!res)
 		return (NULL);
-	ft_strlcpy(str, str1, str_len);
-	ft_strlcat(str, str2, str_len);
-	return (str);
+	start = res;
+	while (*s1)
+		*res++ = *s1++;
+	while (*s2)
+		*res++ = *s2++;
+	*res = '\0';
+	return (start);
 }
-
-// int	main(void)
-// {
-// 	char	*str = ft_strjoin("Hello", " World!");
-// 	printf("String: %s\n", str);
-// 	free(str);
-// 	return (0);
-// }

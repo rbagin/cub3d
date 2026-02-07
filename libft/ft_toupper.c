@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   toupper.c                                          :+:    :+:            */
+/*   ft_toupper.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
+/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/10 13:57:11 by rbagin        #+#    #+#                 */
-/*   Updated: 2024/10/10 20:17:47 by rbagin        ########   odam.nl         */
+/*   Created: 2024/10/08 13:43:39 by yneshev       #+#    #+#                 */
+/*   Updated: 2024/10/24 19:29:12 by yneshev       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
-	{
-		return (c - 32);
-	}
+		c -= 32;
 	return (c);
 }

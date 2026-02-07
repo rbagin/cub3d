@@ -3,59 +3,94 @@
 /*                                                        ::::::::            */
 /*   ft_itoa.c                                          :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
+/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/14 14:04:10 by rbagin        #+#    #+#                 */
-/*   Updated: 2024/10/16 13:33:37 by rbagin        ########   odam.nl         */
+/*   Created: 2024/10/11 15:53:15 by yneshev       #+#    #+#                 */
+/*   Updated: 2024/10/24 19:23:59 by yneshev       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_intlen(int n)
+static char	*itoajr(char *s, long nb, int sign);
+static int	calcnumlen(long nb);
+static char	*revstr(char *str);
+
+char	*ft_itoa(int n)
+{
+	long	nb;
+	int		sign;
+	char	*res;
+
+	sign = 0;
+	nb = n;
+	if (nb < 0)
+	{
+		nb = -nb;
+		sign = 1;
+	}
+	res = malloc(calcnumlen(nb) + sign + 1);
+	if (res == NULL)
+		return (NULL);
+	return (itoajr(res, nb, sign));
+}
+
+static int	calcnumlen(long nb)
 {
 	int	len;
 
-	len = 0;
-	if (n <= 0)
-		len++;
-	while (n != 0)
+	if (nb == 0)
+		len = 1;
+	else
+		len = 0;
+	while (nb > 0)
 	{
-		n = n / 10;
+		nb = nb / 10;
 		len++;
 	}
 	return (len);
 }
 
-char	*ft_itoa(int n)
+static char	*itoajr(char *s, long nb, int sign)
 {
-	char	*str;
-	int		len;
-	long	nb;
+	char	*start;
 
-	nb = n;
-	len = ft_intlen(nb);
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	str[len] = '\0';
-	if (nb < 0)
-	{
-		str[0] = '-';
-		nb *= -1;
-	}
+	start = s;
 	if (nb == 0)
-		str[0] = '0';
-	while (nb > 0)
+		*s++ = '0';
+	else
 	{
-		str[--len] = nb % 10 + '0';
-		nb = nb / 10;
+		while (nb > 0)
+		{
+			*s++ = (nb % 10) + '0';
+			nb = nb / 10;
+		}
+	}
+	if (sign == 1)
+	{
+		*s++ = '-';
+	}
+	*s = '\0';
+	revstr(start);
+	return (start);
+}
+
+static char	*revstr(char *str)
+{
+	int		len;
+	int		i;
+	char	ph;
+
+	i = 0;
+	len = 0;
+	while (str[len])
+		len++;
+	while (i < len / 2)
+	{
+		ph = str[i];
+		str[i] = str[len - i - 1];
+		str[len - i - 1] = ph;
+		i++;
 	}
 	return (str);
 }
-// #include <stdio.h>
-// int main()
-// {
-// 	int n = 123;
-// 	printf("%s\n", ft_itoa(n));
-// }

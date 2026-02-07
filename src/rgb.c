@@ -6,12 +6,12 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:26:31 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/06 19:53:13 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/07 12:20:11 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+//Output value (0-255)
 static bool	parse_single_value(const char *str, int *value, char **next)
 {
 	int	result;
@@ -35,7 +35,9 @@ static bool	parse_single_value(const char *str, int *value, char **next)
 	*next = (char *)str;
 	return (true);
 }
-
+//Parse "R,G,B" format into packed integer
+//out_color: Output color in format 0x00RRGGBB
+//s: String containing "R,G,B" (e.g., "255,100,0")
 bool	parse_rgb(const char *s, int *out_color)
 {
 	int		r;

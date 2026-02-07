@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooks.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 18:51:43 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/07 11:46:12 by imutavdz         ###   ########.fr       */
+/*   Created: 2025/12/30 17:27:51 by imutavdz          #+#    #+#             */
+/*   Updated: 2025/12/30 17:30:12 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-// t_input flags key press - update every move/rotate
-/* Input hooks (WASD movement)
-hooks + loop
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t	i;
 
-key press: set flags in g->inp
-
-key release: unset flags
-
-loop hook:
-
-compute dt
-
-update_player(g, dt) (movement+rotation+collision)
-
-render(g) (ceiling/floor + rays + textures)
-
-put image to window*/
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}

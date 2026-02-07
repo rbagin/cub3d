@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_memcmp.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
+/*   By: yneshev <yneshev@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/10/10 14:49:04 by rbagin        #+#    #+#                 */
-/*   Updated: 2024/10/16 13:36:45 by rbagin        ########   odam.nl         */
+/*   Created: 2024/10/10 14:22:30 by yneshev       #+#    #+#                 */
+/*   Updated: 2024/10/24 19:24:37 by yneshev       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,21 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned int		i;
-	const unsigned char	*str1;
-	const unsigned char	*str2;
+	const unsigned char	*p1;
+	const unsigned char	*p2;
 
-	str1 = (const unsigned char *)s1;
-	str2 = (const unsigned char *)s2;
-	i = 0;
-	while (i < n)
+	p1 = s1;
+	p2 = s2;
+	if (n == 0)
+		return (0);
+	while (n-- > 0)
 	{
-		if (str1[i] != str2[i])
-			return (str1[i] - str2[i]);
-		i++;
+		if (*p1 > *p2)
+			return (1);
+		else if (*p2 > *p1)
+			return (-1);
+		p1++;
+		p2++;
 	}
 	return (0);
 }
-// #include <stdio.h>
-// int main()
-// {
-// 	char *s1 = "Hello2";
-// 	char *s2 = "Hello1";
-// 	printf("%d\n", ft_memcmp(s1, s2, 6));
-// }

@@ -6,12 +6,12 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:43:09 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/06 18:43:46 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/07 13:45:17 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+//Check if line contains only whitespace
 bool	is_blank_line(const char *line)
 {
 	while (*line)
@@ -22,7 +22,9 @@ bool	is_blank_line(const char *line)
 	}
 	return (true);
 }
-
+//Check if line is part of the map grid
+//check if there is a map returned
+//Map lines start with '1', '0', or ' ' (after trimming leading whitespace)
 bool	is_map_line(const char *line)
 {
 	while (*line == ' ' || *line == '\t')
