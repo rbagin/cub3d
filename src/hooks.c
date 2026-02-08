@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 18:51:43 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/07 11:46:12 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/08 11:37:28 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void	setup_hooks(t_game *g)
 {
 	mlx_loop_hook(g->mlx, &game_loop, g);
 	g->player.last_mouse_x = g->screen_w / 2;
+	mlx_set_cursor_mode(g->mlx, MLX_MOUSE_HIDDEN);
 	mlx_set_mouse_pos(g->mlx, g->screen_w / 2, g->screen_h / 2);
 }
