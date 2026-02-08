@@ -43,4 +43,5 @@ bool	load_textures(t_game *g)
 		return (false);
 	if (!load_e_tex(g))
 		return (false);
+	return (true);
 }

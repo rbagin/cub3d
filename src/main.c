@@ -29,9 +29,11 @@ int	main(int argc, char const *argv[])
 	load_map(&game, argv[1]); //exit inside func
 	valid_map(&game);
 	init_mlx(&game);
+	if (!load_textures(&game))
+		return (print_exit(ERR_TEX_LOAD, &game, true), 1);
 	if (mlx_image_to_window(game.mlx, game.frame, 0, 0) < 0)
 		return (print_exit(ERR_MLX, &game, true), 1);
-	mlx_loop_hook(game.mlx, game_loop, &game);
+	setup_hooks(&game);
 	mlx_loop(game.mlx);
 	final_cleanup(&game); //kills grid and paths
 	return (0);

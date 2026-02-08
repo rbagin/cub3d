@@ -30,35 +30,28 @@ render(g) (ceiling/floor + rays + textures)
 
 put image to window*/
 
-static void	key_press(mlx_key_data_t keydata, void *param)
+void	game_loop(void *param)
 {
-	t_game	*g;
+	t_game	*game;
+	t_ray	ray;
 
-	g = (t_game *)param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(g->mlx);
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		g->inp.w = true;
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_RELEASE)
-		g->inp.w = false;
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		g->inp.s = true;
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_RELEASE)
-		g->inp.s = false;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		g->inp.a = true;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_RELEASE)
-		g->inp.a = false;
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-		g->inp.d = true;
-	if (keydata.key == MLX_KEY_D && keydata.action == MLX_RELEASE)
-		g->inp.d = false;
-	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
-		g->inp.right = true;
-	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
-		g->inp.right = false;
-	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
-		g->inp.left = true;
-	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
-		g->inp.left = false;
+	game = (t_game *)param;
+	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+	{
+		mlx_close_window(game->mlx);
+		return ;
+	}
+	handle_movement(game);
+	handle_rotation(game);
+	ft_bzero(game->frame->pixels,
+		game->screen_w * game->screen_h * sizeof(uint32_t));
+	render_scene(game, &game->player, &ray);
+}
+//register all hooks
+//init mouse position for rotation
+void	setup_hooks(t_game *g)
+{
+	mlx_loop_hook(g->mlx, &game_loop, g);
+	g->player.last_mouse_x = g->screen_w / 2;
+	mlx_set_mouse_pos(g->mlx, g->screen_w / 2, g->screen_h / 2);
 }

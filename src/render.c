@@ -11,57 +11,63 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-uint32_t	get_wall_color(t_ray *ray)
-{
-	if (ray->side == 0)
-	{
-		if (ray->step_x == 1)
-			return (W_COLOR);
-		else
-			return (E_COLOR);
-	}
-	else
-	{
-		if (ray->step_y == 1)
-			return (N_COLOR);
-		else
-			return (S_COLOR);
-	}
-}
-
-// static int	get_texture_index(t_ray *ray)
+//can't use this because hardcoded colors, not paresd from file
+// uint32_t	get_wall_color(t_ray *ray)
 // {
 // 	if (ray->side == 0)
 // 	{
 // 		if (ray->step_x == 1)
-// 			return (TEX_W);
+// 			return (W_COLOR);
 // 		else
-// 			return (TEX_E);
+// 			return (E_COLOR);
 // 	}
 // 	else
 // 	{
 // 		if (ray->step_y == 1)
-// 			return (TEX_N);
+// 			return (N_COLOR);
 // 		else
-// 			return (TEX_S);
+// 			return (S_COLOR);
 // 	}
 // }
 
+static int	get_texture_index(t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		if (ray->step_x == 1)
+			return (TEX_W);
+		else
+			return (TEX_E);
+	}
+	else
+	{
+		if (ray->step_y == 1)
+			return (TEX_N);
+		else
+			return (TEX_S);
+	}
+}
+//changed bc must used parsed colors
+//conver parsed rgb to rgba
+
 static void	draw_ceiling_floor(t_game *game, int x, t_ray *ray)
 {
-	int	y;
+	int			y;
+	uint32_t	floor_rgba;
+	uint32_t	ceiling_rgba;
 
+	floor_rgba = ((uint32_t)game->color.floor << 8) | 0xFF;
+	ceiling_rgba = ((uint32_t)game->color.ceiling << 8) | 0xFF;
 	y = 0;
 	while (y < ray->draw_start)
 	{
-		mlx_put_pixel(game->frame, x, y, CEILING_COLOR);
+		mlx_put_pixel(game->frame, x, y, ceiling_rgba);
 		y++;
 	}
 	y = ray->draw_end;
-	while (y < SCREEN_HEIGHT)
+	while (y < game->screen_h)
 	{
-		mlx_put_pixel(game->frame, x, y, FLOOR_COLOR);
+		mlx_put_pixel(game->frame, x, y, floor_rgba);
 		y++;
 	}
 }
@@ -70,9 +76,15 @@ void	draw_vertical_line(t_game *game, int x, t_ray *ray)
 {
 	uint32_t	color;
 	int			y;
+	int			tex_inx;
 
 	draw_ceiling_floor(game, x, ray);
-	color = get_wall_color(ray);
+	tex_inx = get_texture_index(ray);
+	//replace with texture mapping
+	if (ray->side == 0)
+		color = 0xFF0000FF;
+	else
+		color = 0x880000FF;
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
@@ -81,20 +93,20 @@ void	draw_vertical_line(t_game *game, int x, t_ray *ray)
 	}
 }
 
-static void	calc_line_height(t_ray *ray)
+static void	calc_line_height(t_game *g, t_ray *ray)
 {
-	ray->line_height = (int)(SCREEN_HEIGHT / ray->perp_wall_dist);
-	ray->draw_start = -ray->line_height / 2 + SCREEN_HEIGHT / 2;
+	ray->line_height = (int)(g->screen_h / ray->perp_wall_dist);
+	ray->draw_start = -ray->line_height / 2 + g->screen_h / 2;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
-	ray->draw_end = ray->line_height / 2 + SCREEN_HEIGHT / 2;
-	if (ray->draw_end >= SCREEN_HEIGHT)
-		ray->draw_end = SCREEN_HEIGHT -1;
+	ray->draw_end = ray->line_height / 2 + g->screen_h / 2;
+	if (ray->draw_end >= g->screen_h)
+		ray->draw_end = g->screen_h -1;
 }
 
-static void	init_ray_dir(t_player *player, t_ray *ray, int x)
+static void	init_ray_dir(t_game *g, t_player *player, t_ray *ray, int x)
 {
-	ray->camera_x = 2 * x / (double)SCREEN_WIDTH - 1;
+	ray->camera_x = 2 * x / (double)g->screen_w - 1;
 	ray->ray_dir_x = player->dir_x + (player->plane_x * ray->camera_x);
 	ray->ray_dir_y = player->dir_y + (player->plane_y * ray->camera_x);
 }
@@ -104,11 +116,11 @@ void	render_scene(t_game *game, t_player *player, t_ray *ray)
 	int	x;
 
 	x = 0;
-	while (x < SCREEN_WIDTH)
+	while (x < game->screen_w)
 	{
-		init_ray_dir(player, ray, x);
-		cast_ray(&game->player, &game->map, ray);
-		calc_line_height(ray);
+		init_ray_dir(game, player, ray, x);
+		cast_ray(player, &game->map, ray);
+		calc_line_height(game, ray);
 		draw_vertical_line(game, x, ray);
 		x++;
 	}

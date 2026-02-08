@@ -29,6 +29,7 @@
 # define ERR_MLX "Error\nMLX initialization failed"
 # define ERR_MAP_EMPTY "Error\nMAP file is invalid"
 # define ERR_NO_TEX_ID "Error\nTexture identifier not present"
+# define ERR_TEX_LOAD "Error\nFaild texture loading"
 //.cub identifiers
 # define NO "NO"
 # define SO "SO"
@@ -52,7 +53,7 @@
 # define S_COLOR CREATE_RGBA(26, 214, 26, 255)
 # define E_COLOR CREATE_RGBA(2, 47, 226, 255)
 # define W_COLOR CREATE_RGBA(192, 244, 5, 255)
-# define FLOOR_COLOR CREATE_RGBA(0, 0, 0, 255)
-# define CEILING_COLOR CREATE_RGBA(255,255,255, 255)
+// # define FLOOR_COLOR CREATE_RGBA(0, 0, 0, 255)
+// # define CEILING_COLOR CREATE_RGBA(255,255,255, 255)
 
 #endif
