@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-static int	init_mlx(t_game *game)
+int	init_mlx(t_game *game)
 {
 	game->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "cub3D", false);
 	if (!game->mlx)
@@ -23,7 +23,7 @@ static int	init_mlx(t_game *game)
 	return (0);
 }
 
-static void	game_loop(void *param)
+void	game_loop(void *param)
 {
 	t_game	*game;
 	t_ray	ray;

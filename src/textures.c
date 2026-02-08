@@ -12,34 +12,35 @@
 
 #include "cub3d.h"
 //Texture loading (load .png files into memory)
-bool	load_textures(t_game *game)
+
+static bool	load_n_tex(t_game *g)
 {
-	game->tex[TEX_N].texture = mlx_load_png(game->paths.no);
-	game->tex[TEX_S].texture = mlx_load_png(game->paths.so);
-	game->tex[TEX_W].texture = mlx_load_png(game->paths.we);
-	game->tex[TEX_E].texture = mlx_load_png(game->paths.ea);
-	if (!game->tex[TEX_N].texture || !game->tex[TEX_S].texture
-		|| !game->tex[TEX_W].texture || !game->tex[TEX_E].texture)
-		return(false);
-	game->tex[TEX_N].width = game->tex[TEX_N].texture->width;
-	game->tex[TEX_N].height = game->tex[TEX_N].texture->height;
-	game->tex[TEX_S].width = game->tex[TEX_S].texture->width;
-	game->tex[TEX_S].height = game->tex[TEX_S].texture->height;
-	game->tex[TEX_W].width = game->tex[TEX_W].texture->width;
-	game->tex[TEX_W].height = game->tex[TEX_W].texture->height;
-	game->tex[TEX_E].width = game->tex[TEX_E].texture->width;
-	game->tex[TEX_E].height = game->tex[TEX_E].texture->height;
-	return (true);
+	return (load_one_t(g, TEX_N, g->paths.no, "north"));
 }
 
-void	free_textures(t_game *game)
+static bool	load_s_tex(t_game *g)
 {
-	if (game->tex[TEX_N].texture)
-		mlx_delete_texture(game->tex[TEX_N].texture);
-	if (game->tex[TEX_S].texture)
-		mlx_delete_texture(game->tex[TEX_S].texture);
-	if (game->tex[TEX_W].texture)
-		mlx_delete_texture(game->tex[TEX_W].texture);
-	if (game->tex[TEX_E].texture)
-		mlx_delete_texture(game->tex[TEX_E].texture);
+	return (load_one_t(g, TEX_S, g->paths.so, "south"));
+}
+
+static bool	load_w_tex(t_game *g)
+{
+	return (load_one_t(g, TEX_W, g->paths.we, "west"));
+}
+
+static bool	load_e_tex(t_game *g)
+{
+	return (load_one_t(g, TEX_E, g->paths.ea, "east"));
+}
+
+bool	load_textures(t_game *g)
+{
+	if (!load_n_tex(g))
+		return (false);
+	if (!load_s_tex(g))
+		return (false);
+	if (!load_w_tex(g))
+		return (false);
+	if (!load_e_tex(g))
+		return (false);
 }

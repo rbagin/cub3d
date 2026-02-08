@@ -42,8 +42,8 @@
 # define PLAYER_W 'W'
 # define PLAYER_E 'E'
 
-# define SCREEN_WIDTH 1280
-# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 # define FOV_SCALE 66
 
 # define CREATE_RGBA(r, g, b, a) ((r) << 24 | (g) << 16 | (b) << 8 | (a))

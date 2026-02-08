@@ -12,6 +12,8 @@
 
 #include "cub3d.h"
 
+//do I need free_textures()  mlx_DELETE_TEXT??
+
 void	free_lines(char **lines)
 {
 	int	i;
@@ -75,6 +77,7 @@ void	final_cleanup(t_game *g)
 	if (g->map.grid)
 		free_grid(g->map.grid);
 	free_tex(g);
+	free_textures(g);
 	if (g->mlx)
-		mlx_terminate(g->mlx);
+		mlx_terminate(g->mlx); //kills wind and img
 }
