@@ -26,13 +26,13 @@ bool	is_valid_position(t_game *game, double x, double y)
 	t_map	*map;
 
 	map = &game->map;
-	if(is_wall(map, (int)(x - COLISION_MARGIN), (int)(y - COLISION_MARGIN)))
+	if (is_wall(map, (int)(x - COLISION_MARGIN), (int)(y - COLISION_MARGIN)))
 		return (false);
-	if(is_wall(map, (int)(x + COLISION_MARGIN), (int)(y - COLISION_MARGIN)))
+	if (is_wall(map, (int)(x + COLISION_MARGIN), (int)(y - COLISION_MARGIN)))
 		return (false);
-	if(is_wall(map, (int)(x - COLISION_MARGIN), (int)(y + COLISION_MARGIN)))
+	if (is_wall(map, (int)(x - COLISION_MARGIN), (int)(y + COLISION_MARGIN)))
 		return (false);
-	if(is_wall(map, (int)(x + COLISION_MARGIN), (int)(y + COLISION_MARGIN)))
+	if (is_wall(map, (int)(x + COLISION_MARGIN), (int)(y + COLISION_MARGIN)))
 		return (false);
 	return (true);
 }

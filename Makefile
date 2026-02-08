@@ -9,7 +9,7 @@ SRC_F = grid.c \
 		init_game.c \
 		main.c \
 		map_load.c \
-		map_check.c \
+		map_header.c \
 		player_movement_utils.c \
 		player_movement.c \
 		player_rotation.c \

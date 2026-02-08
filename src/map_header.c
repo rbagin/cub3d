@@ -12,7 +12,7 @@
 
 /* if no map:
 If it finishes the loop without returning 
-(meaning it never found a line starting with 1, 0, or ), 
+(meaning it never found a line starting with 1, 0, or ),
 it calls print_exit(ERR_MAP_EMPTY).*/
 #include "cub3d.h"
 //Parse color identifier line (F/C)

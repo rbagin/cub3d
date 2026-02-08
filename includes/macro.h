@@ -15,7 +15,7 @@
 
 //error messages
 # define ERR_ARGS "Error\nIncorrect number of arguments"
-# define ERR_HEAD_CH "Error\nIncorrct identifier in header"
+# define ERR_HEAD_CH "Error\nIncorrect identifier in header"
 # define ERR_MAP_CHARS "Error\nInvalid characters in map"
 # define ERR_MISS_COLOR "Error\nMissing color"
 # define ERR_MAP_EMPTY_LN "Error\nEmpty lines inside map"
@@ -29,6 +29,7 @@
 # define ERR_MLX "Error\nMLX initialization failed"
 # define ERR_MAP_EMPTY "Error\nMAP file is invalid"
 # define ERR_NO_TEX_ID "Error\nTexture identifier not present"
+# define ERR_TEX_LOAD "Error\nFailed texture loading"
 //.cub identifiers
 # define NO "NO"
 # define SO "SO"
@@ -42,17 +43,17 @@
 # define PLAYER_W 'W'
 # define PLAYER_E 'E'
 
-# define SCREEN_WIDTH 1280
-# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 # define FOV_SCALE 66
 
-# define CREATE_RGBA(r, g, b, a) ((r) << 24 | (g) << 16 | (b) << 8 | (a))
-
-# define N_COLOR CREATE_RGBA(167, 17, 17, 255)
-# define S_COLOR CREATE_RGBA(26, 214, 26, 255)
-# define E_COLOR CREATE_RGBA(2, 47, 226, 255)
-# define W_COLOR CREATE_RGBA(192, 244, 5, 255)
-# define FLOOR_COLOR CREATE_RGBA(0, 0, 0, 255)
-# define CEILING_COLOR CREATE_RGBA(255,255,255, 255)
+# define CREATE_RGB(r, g, b) ((r) << 16 | (g) << 8 | (b))
+//delete these after adding textures.
+# define N_COLOR CREATE_RGBA(167, 17, 17)
+# define S_COLOR CREATE_RGBA(26, 214, 26)
+# define E_COLOR CREATE_RGBA(2, 47, 226)
+# define W_COLOR CREATE_RGBA(192, 244, 5)
+// # define FLOOR_COLOR CREATE_RGBA(0, 0, 0, 255)
+// # define CEILING_COLOR CREATE_RGBA(255,255,255, 255)
 
 #endif

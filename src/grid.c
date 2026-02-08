@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/06 17:31:24 by imutavdz      #+#    #+#                 */
-/*   Updated: 2026/02/06 20:06:19 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/07 20:06:19 by imutavdz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	**create_grid(char **lines, int m_start, t_game *g)
 		fill_row(grid[y], lines[m_start + y], g->map.width); //pass specif row and src line
 		y++;
 	}
-	grid[h] = NULL;
+	grid[y] = NULL;
 	return (grid);
 }
 //Parse map section into 2D grid

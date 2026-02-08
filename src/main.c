@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/23 16:29:24 by imutavdz      #+#    #+#                 */
-/*   Updated: 2026/02/06 20:26:06 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/07 20:26:06 by imutavdz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,14 @@ int	main(int argc, char const *argv[])
 		return (print_exit(ERR_ARGS, NULL, false), 1);
 	init_g_struct(&game);
 	load_map(&game, argv[1]); //exit inside func
-	//validation (map closed/ 1spawn / all ids present / rgb valid)
-	// if (!valid_cub(&game))
-	// 	return (cleanup(&game), 1);
-	//initialisation
-	if (init_mlx(&game))
-		return (1);
+	valid_map(&game);
+	init_mlx(&game);
+	if (!load_textures(&game))
+		return (print_exit(ERR_TEX_LOAD, &game, true), 1);
 	if (mlx_image_to_window(game.mlx, game.frame, 0, 0) < 0)
 		return (print_exit(ERR_MLX, &game, true), 1);
-	mlx_loop_hook(game.mlx, game_loop, &game);
+	setup_hooks(&game);
 	mlx_loop(game.mlx);
-	// load_textures(&game);
-	mlx_terminate(game.mlx); //kills wind and img
 	final_cleanup(&game); //kills grid and paths
 	return (0);
 }
