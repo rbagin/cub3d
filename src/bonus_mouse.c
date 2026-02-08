@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 12:04:23 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/08 12:19:27 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/08 12:49:01 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	apply_rot(t_player *p, double speed)
 	p->plane_y = old_plane_x * sin(speed) + p->plane_y * cos(speed);
 }
 
-void	rotate_mouse(t_game *game, t_player *player)
+void	rotate_mouse(t_game *game, t_player *p)
 {
 	int32_t	mouse_x;
 	int32_t	mouse_y;
@@ -44,6 +44,9 @@ void	rotate_mouse(t_game *game, t_player *player)
 
 void	handle_rotation(t_game *game)
 {
+	double	speed;
+
+	speed = ROT_SPEED * game->mlx->delta_time;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		apply_rot(&game->player, -speed);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))

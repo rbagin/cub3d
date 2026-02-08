@@ -14,7 +14,6 @@ SRC_BOTH = grid.c \
 		map_header.c \
 		player_movement_utils.c \
 		player_movement.c \
-		player_rotation.c \
 		raycasting.c \
 		render.c \
 		rgb.c \
@@ -29,10 +28,11 @@ SRC_BNS = bonus_mouse.c \
 		bonus_minimap.c \
 		bonus_doors.c \
 		bonus_sprites.c 
+SRC_SHARED = player_rotation.c
 ifdef WITH_BONUS
 	FILES = $(SRC_BOTH) $(SRC_BNS)
 else
-	FILES = $(SRC_BOTH)
+	FILES = $(SRC_BOTH) $(SRC_SHARED)
 endif
 #path generation
 SRCS = $(addprefix $(SRCDIR)/, $(FILES))
