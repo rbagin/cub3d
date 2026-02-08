@@ -12,41 +12,24 @@
 
 #include "cub3d.h"
 //can't use this because hardcoded colors, not paresd from file
-// uint32_t	get_wall_color(t_ray *ray)
+
+// static int	get_texture_index(t_ray *ray)
 // {
 // 	if (ray->side == 0)
 // 	{
 // 		if (ray->step_x == 1)
-// 			return (W_COLOR);
+// 			return (TEX_W);
 // 		else
-// 			return (E_COLOR);
+// 			return (TEX_E);
 // 	}
 // 	else
 // 	{
 // 		if (ray->step_y == 1)
-// 			return (N_COLOR);
+// 			return (TEX_N);
 // 		else
-// 			return (S_COLOR);
+// 			return (TEX_S);
 // 	}
 // }
-
-static int	get_texture_index(t_ray *ray)
-{
-	if (ray->side == 0)
-	{
-		if (ray->step_x == 1)
-			return (TEX_W);
-		else
-			return (TEX_E);
-	}
-	else
-	{
-		if (ray->step_y == 1)
-			return (TEX_N);
-		else
-			return (TEX_S);
-	}
-}
 //changed bc must used parsed colors
 //conver parsed rgb to rgba
 
@@ -76,7 +59,7 @@ void	draw_vertical_line(t_game *game, int x, t_ray *ray)
 {
 	uint32_t	color;
 	int			y;
-	int			tex_inx;
+	// int			tex_inx;
 	// double		step;
 	// double		tex_pos;
 	// double		wall_x;

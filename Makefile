@@ -2,7 +2,7 @@ NAME = cub3D
 SRCDIR = src
 OBJDIR = obj
 INCDIR = includes
-MLXDIR = MLX42/MLX42
+MLXDIR = MLX42
 LIBFTDIR = ./libft
 SRC_F = grid.c \
 		hooks.c \
@@ -16,8 +16,11 @@ SRC_F = grid.c \
 		raycasting.c \
 		render.c \
 		rgb.c \
+		tex_utils.c \
+		textures.c \
 		split_pars.c \
 		start_player.c \
+		validation.c \
 		cleanup.c \
 		utils_pars.c
 SRCS = $(addprefix $(SRCDIR)/, $(SRC_F))
@@ -26,7 +29,7 @@ INCLUDE = -I$(INCDIR) -I$(MLXDIR)/include -I$(LIBFTDIR) -I./
 LIBFT = $(LIBFTDIR)/libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-MLX_LIB = $(MLXDIR)/build/libmlx42.a -lglfw -ldl -lm
+MLX_LIB = $(MLXDIR)/build/libmlx42.a -lglfw -ldl -pthread -lm
 MLX_A = $(MLXDIR)/build/libmlx42.a
 
 all: $(NAME)

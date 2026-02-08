@@ -22,7 +22,7 @@ void	flfill_pl_pos(t_game *g, int x, int y, bool **checked)
 
 	if (x < 0 || y < 0 || x > g->map.width || y > g->map.height)
 		print_exit(ERR_MAP_WALLS, g, true);
-	if (checked[x][y])
+	if (checked[y][x])
 		return ;
 	c = g->map.grid[y][x];
 	if (c == '1')
@@ -31,7 +31,7 @@ void	flfill_pl_pos(t_game *g, int x, int y, bool **checked)
 		print_exit(ERR_MAP_WALLS, g, true);
 	if (c == '0')
 	{
-		checked[x][y] = true;
+		checked[y][x] = true;
 		flfill_pl_pos(g, x + 1, y, checked); //r
 		flfill_pl_pos(g, x - 1, y, checked); //l
 		flfill_pl_pos(g, x, y + 1, checked); //d
@@ -44,7 +44,9 @@ void	valid_map(t_game *g)
 	bool	**checked;
 	int		y;
 
-	checked = malloc(sizeof(bool *) g->map.height);
+	checked = malloc(sizeof(bool *) * g->map.height);
+	if (!checked)
+		print_exit(ERR_MEMORY, g, true);
 	y = 0;
 	while (y < g->map.height)
 	{

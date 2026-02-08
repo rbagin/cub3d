@@ -141,17 +141,21 @@ typedef	struct	s_game
 	t_color			color;
 	t_texpath		paths;
 	t_texset		tex[4];
-	t_input			inp; //global game state
 	int				screen_w;
 	int				screen_h;
 }	t_game;
 
+static inline uint32_t	rgb_to_rgba(int rgb)
+{
+	return ((uint32_t)rgb << 8 | 0xFF);
+}
+
 //start
 int				init_mlx(t_game *game);
 void			game_loop(void *param);
+bool			load_textures(t_game *g);
 //rgb.c
 bool			parse_rgb(const char *s, int *out_color);
-inline uint32_t	rgb_to_rgba(int rgb);
 
 //cleanup.c
 void			print_exit(const char *errmsg, t_game *game, bool do_cleanup);
@@ -177,7 +181,7 @@ void			render_scene(t_game *game, t_player *player, t_ray *ray);
 //render.c
 uint32_t		get_wall_color(t_ray *ray);
 void			draw_vertical_line(t_game *game, int x, t_ray *ray);
-bool			load_one_t(t_game *g, int id, char *path, char *name);
+bool			load_one_t(t_game *g, int id, char *path);
 
 //player_movement.c
 void			setup_hooks(t_game *game);

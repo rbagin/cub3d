@@ -17,6 +17,7 @@ static void	init_g_struct(t_game *g)
 	ft_bzero(g, sizeof(*g));
 	g->screen_w = SCREEN_WIDTH;
 	g->screen_h = SCREEN_HEIGHT;
+	g->player.last_mouse_x = SCREEN_WIDTH / 2;
 }
 
 int	main(int argc, char const *argv[])
@@ -29,8 +30,8 @@ int	main(int argc, char const *argv[])
 	load_map(&game, argv[1]); //exit inside func
 	valid_map(&game);
 	init_mlx(&game);
-	if (!load_textures(&game))
-		return (print_exit(ERR_TEX_LOAD, &game, true), 1);
+	// if (!load_textures(&game))
+	// 	return (print_exit(ERR_TEX_LOAD, &game, true), 1);
 	if (mlx_image_to_window(game.mlx, game.frame, 0, 0) < 0)
 		return (print_exit(ERR_MLX, &game, true), 1);
 	setup_hooks(&game);

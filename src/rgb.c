@@ -6,16 +6,12 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:26:31 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/07 12:20:11 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/08 11:08:15 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-inline uint32_t rgb_to_rgba(int rgb)
-{
-	return ((uint32_t)rgb << 8 | 0xFF);
-}
 //Output value (0-255)
 static bool	parse_single_value(const char *str, int *value, char **next)
 {

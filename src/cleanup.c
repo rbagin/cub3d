@@ -76,8 +76,8 @@ void	final_cleanup(t_game *g)
 		return ;
 	if (g->map.grid)
 		free_grid(g->map.grid);
-	free_tex(g);
-	free_textures(g);
+	// free_tex(g);
+	// free_textures(g);
 	if (g->mlx)
 		mlx_terminate(g->mlx); //kills wind and img
 }
