@@ -17,60 +17,42 @@
 //if diagonal failed - slide along wall
 void	move_forward(t_game *game, t_player *player)
 {
-	double	new_pos_x;
-	double	new_pos_y;
+	double	dx;
+	double	dy;
 
-	new_pos_x = player->pos.x + player->dir_x * SPEED * game->mlx->delta_time;
-	new_pos_y = player->pos.y + player->dir_y * SPEED * game->mlx->delta_time;
-	if (is_valid_position(game, new_pos_x, new_pos_y))
-	{
-		player->pos.x = new_pos_x;
-		player->pos.y = new_pos_y;
-		return ;
-	}
-	if (is_valid_position(game, new_pos_x, player->pos.y))
-		player->pos.x = new_pos_x;
-	if (is_valid_position(game, player->pos.x, new_pos_y))
-		player->pos.y = new_pos_y;
+	dx = player->dir_x * SPEED * game->mlx->delta_time;
+	dy = player->dir_y * SPEED * game->mlx->delta_time;
+	try_move(game, player, dx, dy);
 }
 
 void	move_backward(t_game *game, t_player *player)
 {
-	double	new_pos_x;
-	double	new_pos_y;
+	double	dx;
+	double	dy;
 
-	new_pos_x = player->pos.x - player->dir_x * SPEED * game->mlx->delta_time;
-	new_pos_y = player->pos.y - player->dir_y * SPEED * game->mlx->delta_time;
-	if (is_valid_position(game, new_pos_x, player->pos.y))
-		player->pos.x = new_pos_x;
-	if (is_valid_position(game, player->pos.x, new_pos_y))
-		player->pos.y = new_pos_y;
+	dx = -player->dir_x * SPEED * game->mlx->delta_time;
+	dy = -player->dir_y * SPEED * game->mlx->delta_time;
+	try_move(game, player, dx, dy);
 }
 
 void	move_left(t_game *game, t_player *player)
 {
-	double	new_pos_x;
-	double	new_pos_y;
+	double	dx;
+	double	dy;
 
-	new_pos_x = player->pos.x + player->dir_y * SPEED * game->mlx->delta_time;
-	new_pos_y = player->pos.y - player->dir_x * SPEED * game->mlx->delta_time;
-	if (is_valid_position(game, new_pos_x, player->pos.y))
-		player->pos.x = new_pos_x;
-	if (is_valid_position(game, player->pos.x, new_pos_y))
-		player->pos.y = new_pos_y;
+	dx = player->dir_y * SPEED * game->mlx->delta_time;
+	dy = -player->dir_x * SPEED * game->mlx->delta_time;
+	try_move(game, player, dx, dy);
 }
 
 void	move_right(t_game *game, t_player *player)
 {
-	double	new_pos_x;
-	double	new_pos_y;
+	double	dx;
+	double	dy;
 
-	new_pos_x = player->pos.x - player->dir_y * SPEED * game->mlx->delta_time;
-	new_pos_y = player->pos.y + player->dir_x * SPEED * game->mlx->delta_time;
-	if (is_valid_position(game, new_pos_x, player->pos.y))
-		player->pos.x = new_pos_x;
-	if (is_valid_position(game, player->pos.x, new_pos_y))
-		player->pos.y = new_pos_y;
+	dx = -player->dir_y * SPEED * game->mlx->delta_time;
+	dy = player->dir_x * SPEED * game->mlx->delta_time;
+	try_move(game, player, dx, dy);
 }
 
 void	handle_movement(t_game *game)

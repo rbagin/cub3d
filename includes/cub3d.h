@@ -187,6 +187,7 @@ bool			load_one_t(t_game *g, int id, char *path);
 void			setup_hooks(t_game *game);
 void			handle_movement(t_game *game);
 bool			is_valid_position(t_game *game, double x, double y);
+void			try_move(t_game *game, t_player *player, double dx, double dy);
 
 //player_rotation.c
 void			handle_rotation(t_game *game);
