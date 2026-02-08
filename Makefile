@@ -1,13 +1,15 @@
 NAME = cub3D
+
 SRCDIR = src
 OBJDIR = obj
 INCDIR = includes
 MLXDIR = MLX42
 LIBFTDIR = ./libft
-SRC_F = grid.c \
-		hooks.c \
+
+SRC_BOTH = grid.c \
 		init_game.c \
 		main.c \
+		hooks.c \
 		map_load.c \
 		map_header.c \
 		player_movement_utils.c \
@@ -23,8 +25,19 @@ SRC_F = grid.c \
 		validation.c \
 		cleanup.c \
 		utils_pars.c
-SRCS = $(addprefix $(SRCDIR)/, $(SRC_F))
-OBJS = $(addprefix $(OBJDIR)/, $(SRC_F:.c=.o))
+SRC_BNS = bonus_mouse.c \
+		bonus_minimap.c \
+		bonus_doors.c \
+		bonus_sprites.c 
+ifdef WITH_BONUS
+	FILES = $(SRC_BOTH) $(SRC_BNS)
+else
+	FILES = $(SRC_BOTH)
+endif
+#path generation
+SRCS = $(addprefix $(SRCDIR)/, $(FILES))
+OBJS = $(addprefix $(OBJDIR)/, $(FILES:.c=.o))
+
 INCLUDE = -I$(INCDIR) -I$(MLXDIR)/include -I$(LIBFTDIR) -I./
 LIBFT = $(LIBFTDIR)/libft.a
 CC = cc
@@ -33,12 +46,18 @@ MLX_LIB = $(MLXDIR)/build/libmlx42.a -lglfw -ldl -pthread -lm
 MLX_A = $(MLXDIR)/build/libmlx42.a
 
 all: $(NAME)
+bonus: fclean
+	@make WITH_BONUS=1 all
+
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
+
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+
 $(NAME): $(OBJS) $(LIBFT) $(MLX_A)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_LIB) -o $(NAME)
+
 $(LIBFT):
 	@make -C $(LIBFTDIR) --no-print-directory
 
@@ -52,23 +71,6 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@make -C $(LIBFTDIR)  fclean --no-print-directory
-
-TEST_NAME = test_ray
-TEST_SRC = $(SRCDIR)/testing/test_raycasting.c \
-	$(SRCDIR)/raycasting.c \
-	$(SRCDIR)/render.c \
-	$(SRCDIR)/player_movement_utils.c \
-	$(SRCDIR)/player_movement.c \
-	$(SRCDIR)/player_rotation.c
-TEST_INCLUDE = -I includes -I $(LIBFTDIR) -I $(MLXDIR)/include
-
-test: $(LIBFT) $(MLX_A)
-	$(CC) $(CFLAGS) $(TEST_SRC) $(TEST_INCLUDE) $(LIBFT) $(MLX_LIB) -o $(TEST_NAME)
-	./$(TEST_NAME)
-
-test_clean:
-	@rm -f $(TEST_NAME)
-	@make -C $(LIBFTDIR)  fclean --no-print-directory
-
 re: fclean all
+
 .PHONY: all clean fclean re libft test test_clean
