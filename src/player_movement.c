@@ -6,7 +6,7 @@
 /*   By: ravi-bagin <ravi-bagin@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/03 13:13:21 by ravi-bagin    #+#    #+#                 */
-/*   Updated: 2026/02/06 20:31:50 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/08 20:31:50 by imutavdz    ########   odam.nl           */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define SPEED 1
 //check first diagonal (no jitter)
-//if diagonal failed - slide along wall
+//if diagonal failed - slide along wall.
 void	move_forward(t_game *game, t_player *player)
 {
 	double	dx;

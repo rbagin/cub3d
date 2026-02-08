@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/29 14:20:53 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/06 19:25:29 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/08 20:31:50 by imutavdz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,3 @@ int	init_mlx(t_game *game)
 		return (print_exit(ERR_MLX, game, true), 1);
 	return (0);
 }
-
