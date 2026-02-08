@@ -37,6 +37,7 @@ int	main(int argc, char const *argv[])
 		return (print_exit(ERR_MLX, &game, true), 1);
 	mlx_loop_hook(game.mlx, game_loop, &game);
 	mlx_loop(game.mlx);
+	// load_textures(&game);
 	mlx_terminate(game.mlx); //kills wind and img
 	final_cleanup(&game); //kills grid and paths
 	return (0);
