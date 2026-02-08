@@ -11,6 +11,11 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+inline uint32_t rgb_to_rgba(int rgb)
+{
+	return ((uint32_t)rgb << 8 | 0xFF);
+}
 //Output value (0-255)
 static bool	parse_single_value(const char *str, int *value, char **next)
 {

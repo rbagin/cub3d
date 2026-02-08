@@ -147,43 +147,44 @@ typedef	struct	s_game
 }	t_game;
 
 //start
-int			init_mlx(t_game *game);
-void		game_loop(void *param);
+int				init_mlx(t_game *game);
+void			game_loop(void *param);
 //rgb.c
-bool		parse_rgb(const char *s, int *out_color);
+bool			parse_rgb(const char *s, int *out_color);
+inline uint32_t	rgb_to_rgba(int rgb);
 
 //cleanup.c
-void		print_exit(const char *errmsg, t_game *game, bool do_cleanup);
-void		free_lines(char **lines);
-void		free_grid(char **grid);
-void		final_cleanup(t_game *g);
-void		free_textures(t_game *g);
+void			print_exit(const char *errmsg, t_game *game, bool do_cleanup);
+void			free_lines(char **lines);
+void			free_grid(char **grid);
+void			final_cleanup(t_game *g);
+void			free_textures(t_game *g);
 
 //parsing map
-bool		load_map(t_game *g, const char *filename);
-bool		is_blank_line(const char *line);
-bool		is_map_line(const char *line);
-int			parse_header(char **lines, t_game *g);
-char		**split_lines(char *file_str, t_game *g);
-void		parse_map_grid(char **lines, int map_start, t_game *game);
-void		find_spawn(t_game *g);
-void		valid_map(t_game *g);
+bool			load_map(t_game *g, const char *filename);
+bool			is_blank_line(const char *line);
+bool			is_map_line(const char *line);
+int				parse_header(char **lines, t_game *g);
+char			**split_lines(char *file_str, t_game *g);
+void			parse_map_grid(char **lines, int map_start, t_game *game);
+void			find_spawn(t_game *g);
+void			valid_map(t_game *g);
 
 //raycasting.c
-void		cast_ray(t_player *player, t_map *map, t_ray *ray);
-void		render_scene(t_game *game, t_player *player, t_ray *ray);
+void			cast_ray(t_player *player, t_map *map, t_ray *ray);
+void			render_scene(t_game *game, t_player *player, t_ray *ray);
 
 //render.c
-uint32_t	get_wall_color(t_ray *ray);
-void		draw_vertical_line(t_game *game, int x, t_ray *ray);
-bool		load_one_t(t_game *g, int id, char *path, char *name);
+uint32_t		get_wall_color(t_ray *ray);
+void			draw_vertical_line(t_game *game, int x, t_ray *ray);
+bool			load_one_t(t_game *g, int id, char *path, char *name);
 
 //player_movement.c
-void		setup_hooks(t_game *game);
-void		handle_movement(t_game *game);
-bool		is_valid_position(t_game *game, double x, double y);
+void			setup_hooks(t_game *game);
+void			handle_movement(t_game *game);
+bool			is_valid_position(t_game *game, double x, double y);
 
 //player_rotation.c
-void		handle_rotation(t_game *game);
+void			handle_rotation(t_game *game);
 
 #endif

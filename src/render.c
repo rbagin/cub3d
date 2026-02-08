@@ -71,23 +71,27 @@ static void	draw_ceiling_floor(t_game *game, int x, t_ray *ray)
 		y++;
 	}
 }
-
+//this one should be modified for textures
 void	draw_vertical_line(t_game *game, int x, t_ray *ray)
 {
 	uint32_t	color;
 	int			y;
 	int			tex_inx;
+	// double		step;
+	// double		tex_pos;
+	// double		wall_x;
 
 	draw_ceiling_floor(game, x, ray);
-	tex_inx = get_texture_index(ray);
+	// tex_inx = get_texture_index(ray);
 	//replace with texture mapping
 	if (ray->side == 0)
-		color = 0xFF0000FF;
+		color = rgb_to_rgba(N_COLOR);
 	else
-		color = 0x880000FF;
+		color = rgb_to_rgba(S_COLOR);
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
+		// color = get_tex_pxl(&game->tex[tex_inx], tex_x, tex_y);
 		mlx_put_pixel(game->frame, x, y, color);
 		y++;
 	}
