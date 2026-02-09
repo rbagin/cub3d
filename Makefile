@@ -27,7 +27,8 @@ SRC_BOTH = grid.c \
 SRC_BNS = bonus_mouse.c \
 		bonus_minimap.c \
 		bonus_doors.c \
-		bonus_sprites.c 
+		bonus_sprites.c \
+		draw.c
 SRC_SHARED = player_rotation.c
 ifdef WITH_BONUS
 	FILES = $(SRC_BOTH) $(SRC_BNS)

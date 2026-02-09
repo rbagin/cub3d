@@ -92,12 +92,15 @@ typedef	struct	s_map
 } 	t_map;
 //A simple 2D coordinate in map-space (floating point so you can be between tiles).
 //x, y: player position in the grid coordinate system (tile units)
-typedef	struct	s_img
-{
-	mlx_texture_t	*img;
-	int				width;
-	int				height;
-}			t_img;
+// typedef	struct	s_img
+// {
+// 	mlx_texture_t	*img;
+// 	void			*pixl;
+// 	int				width;
+// 	int				height;
+// 	int				mmap_x;
+// 	int				mmap_y;
+// }			t_img;
 
 typedef enum e_side
 {
@@ -130,19 +133,35 @@ typedef struct s_texset
 	int				height;
 }			t_texset;
 
+typedef struct s_mini
+{
+	int		tile_x;
+	int		tile_y;
+	int		map_x;
+	int		map_y;
+	int		screen_x;
+	int		screen_y;
+	int		end_x;
+	int		end_y;
+	uint32_t	color;
+}	t_mini;
+
 typedef	struct	s_game
 {
 	mlx_t			*mlx;
 	mlx_image_t		*frame;
-
 	t_player		player;
 	t_map			map;
-
 	t_color			color;
 	t_texpath		paths;
 	t_texset		tex[4];
 	int				screen_w;
 	int				screen_h;
+	mlx_image_t		*img_mini;
+	bool			show_minimap;
+	bool			m_key_pressed;
+	int				mini_tile_sz;
+	int				mini_view_range;
 }	t_game;
 
 static inline uint32_t	rgb_to_rgba(int rgb)
@@ -154,6 +173,7 @@ static inline uint32_t	rgb_to_rgba(int rgb)
 int				init_mlx(t_game *game);
 void			game_loop(void *param);
 bool			load_textures(t_game *g);
+void			init_minimap(t_game *g);
 //rgb.c
 bool			parse_rgb(const char *s, int *out_color);
 
@@ -174,22 +194,24 @@ void			parse_map_grid(char **lines, int map_start, t_game *game);
 void			find_spawn(t_game *g);
 void			valid_map(t_game *g);
 
-//raycasting.c
+//raycasting
 void			cast_ray(t_player *player, t_map *map, t_ray *ray);
 void			render_scene(t_game *game, t_player *player, t_ray *ray);
 
-//render.c
+//render
 uint32_t		get_wall_color(t_ray *ray);
 void			draw_vertical_line(t_game *game, int x, t_ray *ray);
 bool			load_one_t(t_game *g, int id, char *path);
+void			draw_minimap(t_game *g);
 
-//player_movement.c
+//player_movement
 void			setup_hooks(t_game *game);
 void			handle_movement(t_game *game);
 bool			is_valid_position(t_game *game, double x, double y);
 void			try_move(t_game *game, t_player *player, double dx, double dy);
 
-//player_rotation.c
+//player_rotation
 void			handle_rotation(t_game *game);
+void			draw_dir_line(t_game *g, int center_x, int center_y);
 
 #endif

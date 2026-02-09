@@ -46,6 +46,27 @@
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 # define FOV_SCALE 66
+//minimap size
+# ifndef MINI_TL_SZ
+# define MINI_TL_SZ 20
+#endif
+# ifndef MINI_VIEW_RANGE
+# define MINI_VIEW_RANGE 20
+#endif
+//210pxl
+# ifndef MINI_H
+# define MINI_H ((MINI_VIEW_RANGE * 2 + 1) * MINI_TL_SZ)
+#endif
+# ifndef MINI_W
+# define MINI_W ((MINI_VIEW_RANGE * 2 + 1) * MINI_TL_SZ)
+#endif
+
+#define RED_DOT 0xFF0000FF
+#define MINI_WALL 0xFFFFFF80
+#define WALK_TRNS 0x20FF0060
+#define MINI_EMPTY 0x00800030
+#define DIR_RAY 0x00FF00FF
+
 
 # define CREATE_RGB(r, g, b) ((r) << 16 | (g) << 8 | (b))
 //delete these after adding textures.
@@ -53,7 +74,5 @@
 # define S_COLOR CREATE_RGB(26, 214, 26)
 # define E_COLOR CREATE_RGB(2, 47, 226)
 # define W_COLOR CREATE_RGB(192, 244, 5)
-// # define FLOOR_COLOR CREATE_RGBA(0, 0, 0, 255)
-// # define CEILING_COLOR CREATE_RGBA(255,255,255, 255)
 
 #endif
