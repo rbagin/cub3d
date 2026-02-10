@@ -30,6 +30,7 @@
 # define ERR_MAP_EMPTY "Error\nMAP file is invalid"
 # define ERR_NO_TEX_ID "Error\nTexture identifier not present"
 # define ERR_TEX_LOAD "Error\nFailed texture loading"
+# define ERR_SPR_INIT "Error\nFailed sprite initialization"
 //.cub identifiers
 # define NO "NO"
 # define SO "SO"
@@ -62,6 +63,7 @@
 #endif
 
 #define RED_DOT 0xFF0000FF
+#define SPR_DOT 0x00FF00FF
 #define MINI_WALL 0xFFFFFF80
 #define WALK_TRNS 0x20FF0060
 #define MINI_EMPTY 0x00800030

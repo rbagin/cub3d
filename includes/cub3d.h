@@ -6,7 +6,7 @@
 /*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/14 18:14:26 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/06 19:42:00 by rbagin        ########   odam.nl         */
+/*   Updated: 2026/02/10 19:42:00 by imutavdz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,13 @@
 # include "gnl.h"
 # include "macro.h"
 
+typedef	struct s_game t_game;
+
 typedef struct s_pos
 {
 	double	x;	// position on the map
 	double	y;
 }	t_pos;
-
-/*input state (keys pressed) hooks set/unset
-loop reads every frame to move
-int key_press(int keycode, t_game *g)
-int key_release(int keycode, t_game *g)
-*/
-// typedef struct s_input
-// {
-// 	bool	w;
-// 	bool	a;
-// 	bool	s;
-// 	bool	d;
-// 	bool	left;
-// 	bool	right;
-// }			t_input;
 
 typedef struct s_player
 {
@@ -54,6 +41,27 @@ typedef struct s_player
 	double	plane_y;
 	int32_t	last_mouse_x;
 }			t_player;
+
+typedef struct s_spr
+{
+	double			x;
+	double			y;
+	int				screen_x;
+	int				screen_y;
+	int				curr_fr;
+	double			fr_tm;
+	double			fr_durat;
+	int				num_fr;
+	mlx_texture_t	*spr_tex;
+	int				drw_startx;
+	int				drw_endx;
+	int				drw_starty;
+	int				drw_endy;
+	int				spr_h;
+	int				spr_w;
+	double 			spr_x;
+	double 			spr_y;
+}	t_spr;
 
 typedef	struct s_ray
 {
@@ -90,17 +98,6 @@ typedef	struct	s_map
 	int		width;
 	int		height;
 } 	t_map;
-//A simple 2D coordinate in map-space (floating point so you can be between tiles).
-//x, y: player position in the grid coordinate system (tile units)
-// typedef	struct	s_img
-// {
-// 	mlx_texture_t	*img;
-// 	void			*pixl;
-// 	int				width;
-// 	int				height;
-// 	int				mmap_x;
-// 	int				mmap_y;
-// }			t_img;
 
 typedef enum e_side
 {
@@ -135,15 +132,17 @@ typedef struct s_texset
 
 typedef struct s_mini
 {
-	int		tile_x;
-	int		tile_y;
-	int		map_x;
-	int		map_y;
-	int		screen_x;
-	int		screen_y;
-	int		end_x;
-	int		end_y;
+	int			tile_x;
+	int			tile_y;
+	int			map_x;
+	int			map_y;
+	int			screen_x;
+	int			screen_y;
+	int			end_x;
+	int			end_y;
 	uint32_t	color;
+	int			size;
+	t_game		*g;
 }	t_mini;
 
 typedef	struct	s_game
@@ -162,6 +161,9 @@ typedef	struct	s_game
 	bool			m_key_pressed;
 	int				mini_tile_sz;
 	int				mini_view_range;
+	mlx_texture_t	**s_frames;
+	t_spr			*sprite;
+	double			z_buff[SCREEN_WIDTH];
 }	t_game;
 
 static inline uint32_t	rgb_to_rgba(int rgb)
@@ -174,6 +176,9 @@ int				init_mlx(t_game *game);
 void			game_loop(void *param);
 bool			load_textures(t_game *g);
 void			init_minimap(t_game *g);
+bool			init_sprite(t_game *g);
+bool			load_spr(t_game *g);
+void			set_spr_spawn(t_game *g);
 //rgb.c
 bool			parse_rgb(const char *s, int *out_color);
 
@@ -193,16 +198,20 @@ char			**split_lines(char *file_str, t_game *g);
 void			parse_map_grid(char **lines, int map_start, t_game *game);
 void			find_spawn(t_game *g);
 void			valid_map(t_game *g);
+bool			is_inside(t_game *g, int x, int y);
 
 //raycasting
 void			cast_ray(t_player *player, t_map *map, t_ray *ray);
-void			render_scene(t_game *game, t_player *player, t_ray *ray);
 
 //render
+void			render_scene(t_game *game, t_player *player, t_ray *ray);
 uint32_t		get_wall_color(t_ray *ray);
 void			draw_vertical_line(t_game *game, int x, t_ray *ray);
 bool			load_one_t(t_game *g, int id, char *path);
 void			draw_minimap(t_game *g);
+void			draw_sprite(t_game *g, t_spr *s, int spr_screenx);
+void			draw_mini_spr(t_game *g);
+void			render_sprite(t_game *g, t_spr *s);
 
 //player_movement
 void			setup_hooks(t_game *game);
@@ -212,6 +221,8 @@ void			try_move(t_game *game, t_player *player, double dx, double dy);
 
 //player_rotation
 void			handle_rotation(t_game *game);
-void			draw_dir_line(t_game *g, int center_x, int center_y);
+
+void			calc_dir_line(t_game *g, int center_x, int center_y);
+void			update_sprite(t_game *g);
 
 #endif

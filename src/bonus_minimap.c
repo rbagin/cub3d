@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 14:19:07 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/09 20:52:49 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/11 00:16:02 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ void	draw_minimap(t_game *g)
 	center_x = g->mini_view_range * g->mini_tile_sz + (g->mini_tile_sz / 2);
 	center_y = g->mini_view_range * g->mini_tile_sz + (g->mini_tile_sz / 2);
 	draw_dot(g, center_x, center_y);
-	draw_dir_line(g, center_x, center_y);
+	draw_mini_spr(g);
+	calc_dir_line(g, center_x, center_y);
 }

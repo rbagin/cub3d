@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 16:27:57 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/09 18:51:54 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/11 00:18:54 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ int	init_mlx(t_game *game)
 	if (!game->img_mini)
 		return (print_exit(ERR_MLX, game, true), 1);
 	return (0);
+}
+
+bool	init_sprite(t_game *g)
+{
+	g->sprite = malloc(sizeof(t_spr));
+	if (!g->sprite)
+		return (false);
+	if (!load_spr(g))
+		return (false);
+	set_spr_spawn(g);
+	g->sprite->curr_fr = 0;
+	g->sprite->fr_tm = 0.0;
+	return (true);
 }
 
 void	init_minimap(t_game *g)
