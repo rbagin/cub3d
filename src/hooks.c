@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 18:51:43 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/09 19:47:07 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/10 10:09:43 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	game_loop(void *param)
 {
 	t_game			*g;
 	t_ray			ray;
+	bool			is_m_key;
 
 	g = (t_game *)param;
 	if (mlx_is_key_down(g->mlx, MLX_KEY_ESCAPE))
@@ -41,16 +42,10 @@ void	game_loop(void *param)
 		mlx_close_window(g->mlx);
 		return ;
 	}
-	if (mlx_is_key_down(g->mlx, MLX_KEY_M))
-	{
-		if (!g->m_key_pressed)
-		{
-			g->show_minimap = !g->show_minimap;
-			g->m_key_pressed = true;
-		}
-	}
-	else
-		g->m_key_pressed = false;
+	is_m_key = mlx_is_key_down(g->mlx, MLX_KEY_M);
+	if (is_m_key && !g->m_key_pressed)
+		g->show_minimap = !g->show_minimap;
+	g->m_key_pressed = is_m_key;
 	handle_movement(g);
 	handle_rotation(g);
 	ft_bzero(g->frame->pixels, g->screen_w * g->screen_h * sizeof(uint32_t));
