@@ -125,7 +125,7 @@ typedef struct s_color
 
 typedef struct s_texset
 {
-	mlx_texture_t	*texture;
+	xpm_t			*xpm;
 	int				width;
 	int				height;
 }			t_texset;

@@ -1,10 +1,10 @@
-NO ./assets/key.xpm42
-SO ./assets/key.xpm42
-EA ./assets/key.xpm42
-WE ./assets/key.xpm42
+NO ./assets/north.xpm42
+SO ./assets/south.xpm42
+EA ./assets/east.xpm42
+WE ./assets/west.xpm42
 
-F 50,50,50
-C 50,50,50
+F 120,10,0
+C 0,0,139
 
 11111111111111111111111111111111
 10000000000000000000000000000001

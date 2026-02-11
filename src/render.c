@@ -11,25 +11,61 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-//can't use this because hardcoded colors, not paresd from file
 
-// static int	get_texture_index(t_ray *ray)
-// {
-// 	if (ray->side == 0)
-// 	{
-// 		if (ray->step_x == 1)
-// 			return (TEX_W);
-// 		else
-// 			return (TEX_E);
-// 	}
-// 	else
-// 	{
-// 		if (ray->step_y == 1)
-// 			return (TEX_N);
-// 		else
-// 			return (TEX_S);
-// 	}
-// }
+//grabs pxl using 0.0 to 1.0 % coordinate
+
+static uint32_t	sample_texture(xpm_t *xpm, double tex_x, double tex_y)
+{
+	int		x;
+	int		y;
+	uint8_t	*p;
+
+	if (!xpm)
+		return (0); //multipl % by actual text dim
+	x = (int)(tex_x * (double)xpm->texture.width);
+	y = (int)(tex_y * (double)xpm->texture.height);
+	if (x < 0)
+		x = 0;
+	if (x >= (int)xpm->texture.width)
+		x = (int)xpm->texture.width - 1;
+	if (x < 0)
+		y = 0;
+	if (y >= (int)xpm->texture.height)
+		y = (int)xpm->texture.height -1;
+	p = &xpm->texture.pixels[(y * xpm->texture.width + x) * 4];
+	return ((p[0] << 24 | p[1] << 16 | p[2] << 8) | p[3]);
+}
+
+//returns mlx text pointer based on wall face
+
+static xpm_t	*get_text(t_game *g, t_ray *ray)
+{
+	if (ray->side == 0 && ray->ray_dir_x > 0)
+		return (g->tex[TEX_W].xpm);
+	if (ray->side == 0)
+		return (g->tex[TEX_E].xpm);
+	if (ray->ray_dir_y > 0)
+		return (g->tex[TEX_N].xpm);
+	return (g->tex[TEX_S].xpm);
+}
+//check flipping and fetches color
+
+static uint32_t	get_color(t_game *g, t_ray *ray, double tex_y)
+{
+	xpm_t	*xpm;
+	double	tex_x;
+
+	xpm = get_text(g, ray);
+	if (!xpm)
+		return (FALLBACK);
+	tex_x = ray->wall_x; //flip text pervent mirroring
+	if (ray->side == 0 && ray->ray_dir_x > 0)
+		tex_x = 1.0 - tex_x;
+	if (ray->side == 1 && ray->ray_dir_y < 0)
+		tex_x = 1.0 - tex_x;
+	return (sample_texture(xpm, tex_x, tex_y));
+}
+
 //changed bc must used parsed colors
 //conver parsed rgb to rgba
 
@@ -55,27 +91,26 @@ static void	draw_ceiling_floor(t_game *game, int x, t_ray *ray)
 	}
 }
 //this one should be modified for textures
-void	draw_vertical_line(t_game *game, int x, t_ray *ray)
+
+void	draw_vertical_line(t_game *g, int x, t_ray *ray)
 {
 	uint32_t	color;
 	int			y;
-	// int			tex_inx;
-	// double		step;
-	// double		tex_pos;
-	// double		wall_x;
+	double		tex_y;
 
-	draw_ceiling_floor(game, x, ray);
-	// tex_inx = get_texture_index(ray);
-	//replace with texture mapping
-	if (ray->side == 0)
-		color = rgb_to_rgba(N_COLOR);
+	draw_ceiling_floor(g, x, ray);
+	if (ray->side == 0) //calc where ray hit on wall exact decimal 0.0.-1.0
+		ray->wall_x = g->player.pos.y + ray->perp_wall_dist * ray->ray_dir_y;
 	else
-		color = rgb_to_rgba(S_COLOR);
+		ray->wall_x = g->player.pos.x + ray->perp_wall_dist * ray->ray_dir_x;
+	ray->wall_x -= floor(ray->wall_x); //strip int part
 	y = ray->draw_start;
 	while (y < ray->draw_end)
-	{
-		// color = get_tex_pxl(&game->tex[tex_inx], tex_x, tex_y);
-		mlx_put_pixel(game->frame, x, y, color);
+	{ //how far are we down the text
+		tex_y = (y - g->screen_h / 2.0 + ray->line_height / 2.0)
+			/ (double)ray->line_height;
+		color = get_color(g, ray, tex_y);
+		mlx_put_pixel(g->frame, x, y, color);
 		y++;
 	}
 }

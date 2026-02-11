@@ -68,6 +68,7 @@
 #define WALK_TRNS 0x20FF0060
 #define MINI_EMPTY 0x00800030
 #define DIR_RAY 0x00FF00FF
+#define FALLBACK 0xFF00FFFF
 
 
 # define CREATE_RGB(r, g, b) ((r) << 16 | (g) << 8 | (b))

@@ -34,8 +34,8 @@ int	main(int argc, char const *argv[])
 	load_map(&game, argv[1]); //exit inside func
 	valid_map(&game);
 	init_mlx(&game);
-	// if (!load_textures(&game))
-	// 	return (print_exit(ERR_TEX_LOAD, &game, true), 1);
+	if (!load_textures(&game))
+		return (print_exit(ERR_TEX_LOAD, &game, true), 1);
 	if (mlx_image_to_window(game.mlx, game.frame, 0, 0) < 0)
 		return (print_exit(ERR_MLX, &game, true), 1);
 	if (mlx_image_to_window(game.mlx, game.img_mini, 0, 0) < 0)
