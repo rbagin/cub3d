@@ -22,6 +22,7 @@ static char	*read_file(int fd, t_game *g)
 	if (!full_str)
 		print_exit(ERR_MEMORY, g, false);
 	line = get_next_line(fd);
+	//if(!line)??
 	while (line)
 	{
 		store = ft_strjoin(full_str, line);
@@ -79,16 +80,16 @@ bool	load_map(t_game *g, const char *filename)
 	int		fd;
 	char	*content;
 	char	**lines;
-	int		m_start;
+	int		map_start;
 
 	fd = open_map(filename, g);
 	content = read_file(fd, g);
 	close(fd);
 	lines = split_lines(content, g);
 	free(content);
-	m_start = parse_header(lines, g);
+	map_start = parse_header(lines, g);
 	check_identif(g);
-	parse_map_grid(lines, m_start, g);
+	parse_map_grid(lines, map_start, g);
 	find_spawn(g);
 	free_lines(lines);
 	return (true);

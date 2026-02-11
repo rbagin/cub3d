@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   init_game.c                                        :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: rbagin <rbagin@student.codam.nl>             +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2026/01/29 14:20:53 by rbagin        #+#    #+#                 */
-/*   Updated: 2026/02/08 20:31:50 by imutavdz      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   init_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/02/09 16:27:57 by imutavdz          #+#    #+#             */
+/*   Updated: 2026/02/11 00:18:54 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,39 @@ int	init_mlx(t_game *game)
 	game->frame = mlx_new_image(game->mlx, game->screen_w, game->screen_h);
 	if (!game->frame)
 		return (print_exit(ERR_MLX, game, true), 1);
+	game->img_mini = mlx_new_image(game->mlx, MINI_W, MINI_H);
+	if (!game->img_mini)
+		return (print_exit(ERR_MLX, game, true), 1);
 	return (0);
+}
+
+bool	init_sprite(t_game *g)
+{
+	g->sprite = malloc(sizeof(t_spr));
+	if (!g->sprite)
+		return (false);
+	if (!load_spr(g))
+		return (false);
+	set_spr_spawn(g);
+	g->sprite->curr_fr = 0;
+	g->sprite->fr_tm = 0.0;
+	return (true);
+}
+
+void	init_minimap(t_game *g)
+{
+	g->mini_tile_sz = MINI_TL_SZ;
+	g->mini_view_range = MINI_VIEW_RANGE;
+	g->img_mini = mlx_new_image(g->mlx, MINI_W, MINI_H);
+	if (!g->img_mini)
+	{
+		print_exit(ERR_MLX, g, true);
+		return ;
+	}
+	if (mlx_image_to_window(g->mlx, g->img_mini, 10, 10) < 0)
+	{
+		print_exit(ERR_MLX, g, true);
+		return ;
+	}//layer priority
+	g->img_mini->instances[0].z = 100; //high z value (ONTOP)
 }

@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/01/25 17:42:59 by imutavdz      #+#    #+#                 */
-/*   Updated: 2026/02/08 20:31:50 by imutavdz      ########   odam.nl         */
+/*   Updated: 2026/02/09 20:07:21 by imutavdz      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ bool	parse_color_line(const char *line, t_game *g)
 }
 //Set texture path, ensure no duplicates
 //path_ptr: Source path string (after identifier)
+
 bool	set_tex_path(char **dst, const char *path_pt)
 {
 	char	*trim;
@@ -54,6 +55,7 @@ bool	set_tex_path(char **dst, const char *path_pt)
 	return (true);
 }
 //Parse texture identifier line (NO/SO/WE/EA)
+
 bool	parse_tex_line(const char *line, t_game *g)
 {
 	while (*line == ' ' || *line == '\t')
@@ -71,11 +73,12 @@ bool	parse_tex_line(const char *line, t_game *g)
 //Parse header section (textures and colors)
 //Processes lines until map starts.
 //Returns: Index where map begins, or exits on error
+
 int	parse_header(char **lines, t_game *g)
 {
 	int	i;
 
-	i = 0;
+	i = 0; //can iterate wuth a pointer instead
 	while (lines[i])
 	{
 		if (is_blank_line(lines[i]))
@@ -85,12 +88,7 @@ int	parse_header(char **lines, t_game *g)
 		}
 		if (is_map_line(lines[i]))
 			return (i);
-		if (parse_tex_line(lines[i], g))
-		{
-			i++;
-			continue ;
-		}
-		if (parse_color_line(lines[i], g))
+		if (parse_tex_line(lines[i], g) || parse_color_line(lines[i], g))
 		{
 			i++;
 			continue ;

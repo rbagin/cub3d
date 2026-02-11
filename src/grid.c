@@ -15,7 +15,7 @@
 //calc_dim_map exits on blank lines, but the subject allows trailing empty 
 //lines after the map—you should stop at first blank after map start
 
-static void	calc_dim_map(char **lines, int m_start, int *h, int *w, t_game *g)
+static void	calc_dim_map(char **lines, int m_start, t_game *g)
 {
 	int		height;
 	int		max_width;
@@ -36,8 +36,8 @@ static void	calc_dim_map(char **lines, int m_start, int *h, int *w, t_game *g)
 	}
 	if (height == 0 || max_width == 0)
 		print_exit(ERR_MAP_EMPTY, g, true);
-	*h = height;
-	*w = max_width;
+	g->map.height = height;
+	g->map.width = max_width;
 }
 
 //handles the horisontal chars in a row
@@ -63,6 +63,7 @@ static void	fill_row(char *grid_row, char *line, int w)
 //Convert map lines to rectangular 2D grid
 //handles vertical rows
 //Returns: Allocated 2D char array (rectangular, space-padded)
+
 static char	**create_grid(char **lines, int m_start, t_game *g)
 {
 	int		y;
@@ -88,8 +89,9 @@ static char	**create_grid(char **lines, int m_start, t_game *g)
 }
 //Parse map section into 2D grid
 //init alloc
+
 void	parse_map_grid(char **lines, int map_start, t_game *g)
 {
-	calc_dim_map(lines, map_start, &g->map.height, &g->map.width, g);
+	calc_dim_map(lines, map_start, g);
 	g->map.grid = create_grid(lines, map_start, g);
 }

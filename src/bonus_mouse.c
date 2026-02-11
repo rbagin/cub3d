@@ -6,9 +6,11 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 12:04:23 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/08 12:49:01 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/11 08:33:38 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+//also fixed p->plane calc
 
 #include "cub3d.h"
 
@@ -18,14 +20,12 @@
 static void	apply_rot(t_player *p, double speed)
 {
 	double	old_dir_x;
-	double	old_plane_x;
 
 	old_dir_x = p->dir_x;
 	p->dir_x = p->dir_x * cos(speed) - p->dir_y * sin(speed);
 	p->dir_y = old_dir_x * sin(speed) + p->dir_y * cos(speed);
-	old_plane_x = p->plane_x;
-	p->plane_x = p->plane_x * cos(speed) - p->plane_y * sin(speed);
-	p->plane_y = old_plane_x * sin(speed) + p->plane_y * cos(speed);
+	p->plane_x = -p->dir_y * 0.66;
+	p->plane_y = p->dir_x * 0.66;
 }
 
 void	rotate_mouse(t_game *game, t_player *p)
