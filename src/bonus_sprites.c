@@ -6,13 +6,13 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 09:39:53 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/11 00:09:24 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/11 06:15:46 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void set_spr_spawn(t_game *g)
+void	set_spr_spawn(t_game *g)
 {
 	int	x;
 	int	y;
@@ -41,18 +41,19 @@ void set_spr_spawn(t_game *g)
 bool	load_spr(t_game *g)
 {
 	int		i;
-	char	*paths[3];
+	char	*paths[4];
 
 	paths[0] = "textures/left.png";
-	paths[1] = "textures/right.png";
-	paths[2] = "textures/front.png";
-	g->sprite->num_fr = 3; //alloc arr 3 frames
-	g->sprite->fr_durat = 0.2;
-	g->s_frames = malloc(sizeof(mlx_texture_t *) * 3);
+	paths[1] = "textures/front.png";
+	paths[2] = "textures/right.png";
+	paths[3] = "textures/front.png";
+	g->sprite->num_fr = 4; //alloc arr 3 frames
+	g->sprite->fr_durat = 0.1;
+	g->s_frames = malloc(sizeof(mlx_texture_t *) * 4);
 	if (!g->s_frames)
 		return (false);
 	i = 0;
-	while (i < 3)
+	while (i < 4)
 	{
 		g->s_frames[i] = mlx_load_png(paths[i]);
 		if (!g->s_frames[i])
@@ -75,7 +76,7 @@ static void	trnsf_pos_to_camera(t_game *g, t_spr *s, double *sp_x, double *sp_y)
 	transf_x = inv_det * (g->player.dir_y * (*sp_x)
 			-g->player.dir_x * (*sp_y));
 	transf_y = inv_det * (-g->player.plane_y * (*sp_x)
-			+g->player.plane_x * (*sp_y));
+			+ g->player.plane_x * (*sp_y));
 	*sp_x = transf_x;
 	*sp_y = transf_y;
 }
@@ -103,7 +104,8 @@ void	render_sprite(t_game *g, t_spr *s)
 	s->drw_endx = s->spr_w / 2 + spr_screenx;
 	if (s->drw_endx >= g->screen_w)
 		s->drw_endx = g->screen_w - 1;
-	draw_sprite(g, s, spr_screenx);
+	if (s->drw_startx < s->drw_endx && s->drw_starty < s->drw_endy)
+		draw_sprite(g, s, spr_screenx);
 }
 
 void	update_sprite(t_game *g)

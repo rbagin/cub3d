@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/09 20:31:35 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/10 23:02:08 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/11 06:13:14 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,16 @@ static void	draw_sp_dot(t_game *g, t_spr *sp)
 void	draw_mini_spr(t_game *g)
 {
 	t_spr	*sp;
+	int		sp_tilex;
+	int		sp_tiley;
 
 	sp = g->sprite;
-	sp->screen_x = (int)((sp->x - g->player.pos.x + g->mini_view_range)
-			* g->mini_tile_sz);
-	sp->screen_y = (int)((sp->y - g->player.pos.y + g->mini_view_range)
-			*g->mini_tile_sz);
+	sp_tilex = (int)sp->x - (int)g->player.pos.x;
+	sp_tiley = (int)sp->y - (int)g->player.pos.y;
+	sp->screen_x = (int)(sp_tilex + g->mini_view_range)
+		* g->mini_tile_sz + (g->mini_tile_sz / 2);
+	sp->screen_y = (int)(sp_tiley + g->mini_view_range)
+		* g->mini_tile_sz + (g->mini_tile_sz / 2);
 	if (sp->screen_x >= 0 && sp->screen_x < (int)g->img_mini->width
 		&& sp->screen_y >= 0 && sp->screen_y < (int)g->img_mini->height)
 		draw_sp_dot(g, sp);

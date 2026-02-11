@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 19:05:26 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/11 00:35:38 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/11 06:47:16 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,22 @@ static int	calc_tex_x(t_spr *s, int screen_x, int spr_screenx)
 	return ((screen_x - (-s->spr_w / 2 + spr_screenx))
 		* s->spr_tex->width / s->spr_w);
 }
+//multiply by 4, each pxl takse 4 bytes RGBA
 
 static uint32_t	get_spr_pxl(t_spr *s, int tex_x, int tex_y)
 {
-	uint32_t	*pixels;
+	uint8_t		*pixels;
+	int			indx;
+	uint32_t	color;
 
 	if (tex_x < 0 || tex_x >= (int)s->spr_tex->width
 		|| tex_y < 0 || tex_y >= (int)s->spr_tex->height)
-		return (0);
-	pixels = (uint32_t *)s->spr_tex->pixels;
-	return (pixels[tex_y * s->spr_tex->width + tex_x]);
+		return (0); //calc byte idx in 1d array
+	indx = (tex_y * s->spr_tex->width + tex_x) * 4;
+	pixels = &s->spr_tex->pixels[indx];
+	color = (pixels[0] << 24) | (pixels[1] << 16)
+		| (pixels[2] << 8) | pixels[3];
+	return (color);
 }
 
 static bool	check_zbuff(t_game *g, t_spr *s, int x)
