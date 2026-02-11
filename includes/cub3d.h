@@ -212,6 +212,9 @@ void			draw_minimap(t_game *g);
 void			draw_sprite(t_game *g, t_spr *s, int spr_screenx);
 void			draw_mini_spr(t_game *g);
 void			render_sprite(t_game *g, t_spr *s);
+uint32_t		sample_texture(xpm_t *xpm, double tex_x, double tex_y);
+xpm_t			*get_text(t_game *g, t_ray *ray);
+uint32_t		get_color(t_game *g, t_ray *ray, double tex_y);
 
 //player_movement
 void			setup_hooks(t_game *game);

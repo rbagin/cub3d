@@ -12,59 +12,67 @@
 
 #include "cub3d.h"
 
-// bool	load_one_t(t_game *g, int id, char *path)
-// {
-// 	g->tex[id].xpm = mlx_load_xpm42(path);
-// 	if (!g->tex[id].xpm)
-// 		print_exit(ERR_TEX_LOAD, g, true);
-// 	g->tex[id].width = g->tex[id].xpm->texture.width;
-// 	g->tex[id].height = g->tex[id].xpm->texture.height;
-// 	return (true);
-// }
+//grabs pxl using 0.0 to 1.0 % coordinate
+
+uint32_t	sample_texture(xpm_t *xpm, double tex_x, double tex_y)
+{
+	int		x;
+	int		y;
+	uint8_t	*p;
+
+	if (!xpm)
+		return (0); //multipl % by actual text dim
+	x = (int)(tex_x * (double)xpm->texture.width);
+	y = (int)(tex_y * (double)xpm->texture.height);
+	if (x < 0)
+		x = 0;
+	if (x >= (int)xpm->texture.width)
+		x = (int)xpm->texture.width - 1;
+	if (x < 0)
+		y = 0;
+	if (y >= (int)xpm->texture.height)
+		y = (int)xpm->texture.height -1;
+	p = &xpm->texture.pixels[(y * xpm->texture.width + x) * 4];
+	return ((p[0] << 24 | p[1] << 16 | p[2] << 8) | p[3]);
+}
+
+//returns mlx text pointer based on wall face
+
+xpm_t	*get_text(t_game *g, t_ray *ray)
+{
+	if (ray->side == 0 && ray->ray_dir_x > 0)
+		return (g->tex[TEX_W].xpm);
+	if (ray->side == 0)
+		return (g->tex[TEX_E].xpm);
+	if (ray->ray_dir_y > 0)
+		return (g->tex[TEX_N].xpm);
+	return (g->tex[TEX_S].xpm);
+}
+//check flipping and fetches color
+
+uint32_t	get_color(t_game *g, t_ray *ray, double tex_y)
+{
+	xpm_t	*xpm;
+	double	tex_x;
+
+	xpm = get_text(g, ray);
+	if (!xpm)
+		return (FALLBACK);
+	tex_x = ray->wall_x; //flip text pervent mirroring
+	if (ray->side == 0 && ray->ray_dir_x > 0)
+		tex_x = 1.0 - tex_x;
+	if (ray->side == 1 && ray->ray_dir_y < 0)
+		tex_x = 1.0 - tex_x;
+	return (sample_texture(xpm, tex_x, tex_y));
+}
 
 bool	load_one_t(t_game *g, int id, char *path)
 {
-	int	fd;
-	
-	//  DEBUG 1: Print the path
-	printf("\n=== LOADING TEXTURE %d ===\n", id);
-	printf("Path: '%s'\n", path);
-	printf("Path length: %zu\n", ft_strlen(path));
-	
-	//  DEBUG 2: Check if file exists
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-	{
-		printf(" ERROR: File does not exist or cannot be opened!\n");
-		printf("   Check:\n");
-		printf("   1. Does file exist? Run: ls -la %s\n", path);
-		printf("   2. Is path correct?\n");
-		printf("   3. Are you in the right directory?\n");
-		print_exit(ERR_TEX_LOAD, g, true);
-	}
-	close(fd);
-	printf("File exists and can be opened\n");
-	
-	//  DEBUG 3: Try to load XPM42
-	printf("Calling mlx_load_xpm42()...\n");
 	g->tex[id].xpm = mlx_load_xpm42(path);
-	
 	if (!g->tex[id].xpm)
-	{
-		printf("ERROR: mlx_load_xpm42() returned NULL\n");
-		printf("   This means the XPM42 file format is INVALID\n");
-		printf("   Run: cat %s\n", path);
-		printf("   And check the format matches XPM42 spec\n");
 		print_exit(ERR_TEX_LOAD, g, true);
-	}
-	
-	printf(" Texture loaded successfully!\n");
-	printf("   Width: %d\n", g->tex[id].xpm->texture.width);
-	printf("   Height: %d\n", g->tex[id].xpm->texture.height);
-	
 	g->tex[id].width = g->tex[id].xpm->texture.width;
 	g->tex[id].height = g->tex[id].xpm->texture.height;
-	
 	return (true);
 }
 
