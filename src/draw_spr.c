@@ -6,23 +6,12 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 19:05:26 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/11 06:47:16 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/11 09:04:50 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	calc_tex_y(t_spr *s, int screen_y, int screen_h)
-{
-	int	d;
-	int	tex_y;
-
-	d = screen_y * 256 - screen_h * 128 + s->spr_h * 128;
-	tex_y = ((d * s->spr_tex->height) / s->spr_h) / 256;
-	if (tex_y < 0)
-		return (0);
-	return (tex_y);
-}
 
 static int	calc_tex_x(t_spr *s, int screen_x, int spr_screenx)
 {
@@ -53,29 +42,41 @@ static bool	check_zbuff(t_game *g, t_spr *s, int x)
 		&& x < g->screen_w && s->spr_y < g->z_buff[x]);
 }
 
+static void	draw_stripe_spr(t_game *g, t_spr *s, int x, int tex_x)
+{
+	double		step;
+	double		tex_pos;
+	int			y;
+	uint32_t	color;
+
+	step = (double)s->spr_tex->height / s->spr_h;
+	tex_pos = (s->drw_starty - (-s->spr_h / 2 + g->screen_h / 2)) * step;
+	y = s->drw_starty;
+	while (y < s->drw_endy)
+	{
+		color = get_spr_pxl(s, tex_x, (int)tex_pos);
+		if ((color & 0x000000FF) != 0)
+			mlx_put_pixel(g->frame, x, y, color);
+		tex_pos += step;
+		y++;
+	}
+}
+//logic of two loops:
+//horisontal = which col x im drawing
+//vertical = for this col x, draw a stripe of pxls from top to bottom
+
 void	draw_sprite(t_game *g, t_spr *s, int spr_screenx)
 {
 	int			x;
-	int			y;
 	int			tex_x;
-	int			tex_y;
-	uint32_t	color;
 
 	x = s->drw_startx;
 	while (x < s->drw_endx)
 	{
-		tex_x = calc_tex_x(s, x, spr_screenx);
 		if (check_zbuff(g, s, x))
 		{
-			y = s->drw_starty;
-			while (y < s->drw_endy)
-			{
-				tex_y = calc_tex_y(s, y, spr_screenx);
-				color = get_spr_pxl(s, tex_x, tex_y);
-				if ((color & 0x000000FF) != 0)
-					mlx_put_pixel(g->frame, x, y, color);
-				y++;
-			}
+			tex_x = calc_tex_x(s, x, spr_screenx);
+			draw_stripe_spr(g, s, x, tex_x);
 		}
 		x++;
 	}
