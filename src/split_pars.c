@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:44:27 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/07 12:07:49 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/10 14:52:35 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 //where and when do I free this line??
@@ -38,8 +38,8 @@ static int	count_lines(const char *str)
 
 static char	*extract_line(const char *start, const char *end)
 {
-	size_t	len;
 	char	*line;
+	size_t	len;
 	size_t	i;
 
 	len = end - start;

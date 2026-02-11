@@ -14,6 +14,25 @@
 
 //do I need free_textures()  mlx_DELETE_TEXT??
 
+void	free_sprite(t_game *g)
+{
+	int	i;
+
+	if (g->s_frames)
+	{
+		i = 0;
+		while (i < 3)
+		{
+			if (g->s_frames)
+				mlx_delete_texture(g->s_frames[i]);
+			i++;
+		}
+		free(g->s_frames);
+	}
+	if (g->sprite)
+		free(g->sprite);
+}
+
 void	free_lines(char **lines)
 {
 	int	i;
@@ -78,6 +97,7 @@ void	final_cleanup(t_game *g)
 		free_grid(g->map.grid);
 	// free_tex(g);
 	// free_textures(g);
+	free_sprite(g);
 	if (g->mlx)
 		mlx_terminate(g->mlx); //kills wind and img
 }

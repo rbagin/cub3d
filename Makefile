@@ -1,7 +1,12 @@
 NAME = cub3D
+NAME_B = cub3D_bonus
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g -ffast-math -O3
 
 SRCDIR = src
 OBJDIR = obj
+OBJDIR_B = obj_b
 INCDIR = includes
 MLXDIR = MLX42
 LIBFTDIR = ./libft
@@ -24,39 +29,40 @@ SRC_BOTH = grid.c \
 		validation.c \
 		cleanup.c \
 		utils_pars.c
-SRC_BNS = bonus_mouse.c \
-		bonus_minimap.c \
-		bonus_doors.c \
-		bonus_sprites.c 
-SRC_SHARED = player_rotation.c
-ifdef WITH_BONUS
-	FILES = $(SRC_BOTH) $(SRC_BNS)
-else
-	FILES = $(SRC_BOTH) $(SRC_SHARED)
-endif
-#path generation
-SRCS = $(addprefix $(SRCDIR)/, $(FILES))
-OBJS = $(addprefix $(OBJDIR)/, $(FILES:.c=.o))
+SRC_BNS = bns/init_b.c \
+		bns/bonus_mouse.c \
+		bns/bonus_minimap.c \
+		bns/bonus_doors.c \
+		bns/bonus_sprites.c \
+		bns/draw_mini.c \
+		bns/draw_spr.c
+SRC_SHARED = player_rotation.c mand_bots.c
+#obj path generation
+OBJS = $(addprefix $(OBJDIR)/, $(SRC_BOTH:.c=.o) $(SRC_SHARED:.c=.o))
+OBJS_B = $(addprefix $(OBJDIR_B)/, $(SRC_BOTH:.c=.o) $(SRC_BNS:.c=.o))
 
 INCLUDE = -I$(INCDIR) -I$(MLXDIR)/include -I$(LIBFTDIR) -I./
 LIBFT = $(LIBFTDIR)/libft.a
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
 MLX_LIB = $(MLXDIR)/build/libmlx42.a -lglfw -ldl -pthread -lm
 MLX_A = $(MLXDIR)/build/libmlx42.a
 
 all: $(NAME)
-bonus: fclean
-	@make WITH_BONUS=1 all
 
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
-
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+bonus : $(NAME_B)
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX_A)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_LIB) -o $(NAME)
+
+$(NAME_B): $(OBJS_B) $(LIBFT) $(MLX_A)
+	$(CC) $(CFLAGS) $(OBJS_B) $(LIBFT) $(MLX_LIB) -o $(NAME_B)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+
+$(OBJDIR_B)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 $(LIBFT):
 	@make -C $(LIBFTDIR) --no-print-directory
@@ -66,11 +72,11 @@ $(MLX_A):
 	@make -C $(MLXDIR)/build -j4
 
 clean:
-	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJDIR) $(OBJDIR_B)
 	@make -C $(LIBFTDIR) clean --no-print-directory
 fclean: clean
-	@rm -rf $(NAME)
+	@rm -rf $(NAME) $(NAME_B)
 	@make -C $(LIBFTDIR)  fclean --no-print-directory
 re: fclean all
 
-.PHONY: all clean fclean re libft test test_clean
+.PHONY: all clean fclean re bonus

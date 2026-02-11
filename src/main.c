@@ -18,6 +18,10 @@ static void	init_g_struct(t_game *g)
 	g->screen_w = SCREEN_WIDTH;
 	g->screen_h = SCREEN_HEIGHT;
 	g->player.last_mouse_x = SCREEN_WIDTH / 2;
+	g->mini_tile_sz = MINI_TL_SZ;
+	g->mini_view_range = MINI_VIEW_RANGE;
+	g->m_key_pressed = false;
+	g->show_minimap = true;
 }
 
 int	main(int argc, char const *argv[])
@@ -34,6 +38,10 @@ int	main(int argc, char const *argv[])
 	// 	return (print_exit(ERR_TEX_LOAD, &game, true), 1);
 	if (mlx_image_to_window(game.mlx, game.frame, 0, 0) < 0)
 		return (print_exit(ERR_MLX, &game, true), 1);
+	if (mlx_image_to_window(game.mlx, game.img_mini, 0, 0) < 0)
+		return (print_exit(ERR_MLX, &game, true), 1);
+	if (!init_sprite(&game))
+		return (print_exit(ERR_SPR_INIT, &game, true), 1);
 	setup_hooks(&game);
 	mlx_loop(game.mlx);
 	final_cleanup(&game); //kills grid and paths
