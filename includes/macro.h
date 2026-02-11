@@ -52,7 +52,7 @@
 # define MINI_TL_SZ 20
 #endif
 # ifndef MINI_VIEW_RANGE
-# define MINI_VIEW_RANGE 20
+# define MINI_VIEW_RANGE 15
 #endif
 //210pxl
 # ifndef MINI_H

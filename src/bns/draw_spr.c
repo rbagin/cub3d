@@ -6,12 +6,11 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 19:05:26 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/11 09:04:50 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/11 11:35:38 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 static int	calc_tex_x(t_spr *s, int screen_x, int spr_screenx)
 {
