@@ -188,6 +188,8 @@ void			free_lines(char **lines);
 void			free_grid(char **grid);
 void			final_cleanup(t_game *g);
 void			free_textures(t_game *g);
+void			free_tex(t_game *g);
+void			free_sprite(t_game *g)
 
 //parsing map
 bool			load_map(t_game *g, const char *filename);
