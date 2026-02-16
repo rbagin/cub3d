@@ -6,62 +6,62 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 23:44:26 by imutavdz          #+#    #+#             */
-/*   Updated: 2024/12/24 00:17:29 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/16 23:22:24 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+#include "libft.h"
 
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
+// size_t	ft_strlen(const char *s)
+// {
+// 	size_t	i;
 
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	if (!s)
+// 		return (0);
+// 	while (s[i])
+// 		i++;
+// 	return (i);
+// }
 
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	i;
+// char	*ft_strchr(const char *s, int c)
+// {
+// 	size_t	i;
 
-	i = 0;
-	if (!s)
-		return (NULL);
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
-		i++;
-	}
-	if ((char)c == '\0')
-		return ((char *)&s[i]);
-	return (NULL);
-}
+// 	i = 0;
+// 	if (!s)
+// 		return (NULL);
+// 	while (s[i])
+// 	{
+// 		if (s[i] == (char)c)
+// 			return ((char *)&s[i]);
+// 		i++;
+// 	}
+// 	if ((char)c == '\0')
+// 		return ((char *)&s[i]);
+// 	return (NULL);
+// }
 
-char	*ft_strdup(const char *s)
-{
-	char	*dup;
-	size_t	len;
-	size_t	i;
+// char	*ft_strdup(const char *s)
+// {
+// 	char	*dup;
+// 	size_t	len;
+// 	size_t	i;
 
-	if (!s)
-		return (NULL);
-	len = ft_strlen(s);
-	dup = malloc(len + 1);
-	if (!dup)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		dup[i] = s[i];
-		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
+// 	if (!s)
+// 		return (NULL);
+// 	len = ft_strlen(s);
+// 	dup = malloc(len + 1);
+// 	if (!dup)
+// 		return (NULL);
+// 	i = 0;
+// 	while (i < len)
+// 	{
+// 		dup[i] = s[i];
+// 		i++;
+// 	}
+// 	dup[i] = '\0';
+// 	return (dup);
+// }
 
 char	*ft_strndup(const char *s, size_t n)
 {

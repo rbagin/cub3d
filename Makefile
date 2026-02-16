@@ -2,7 +2,7 @@ NAME = cub3D
 NAME_B = cub3D_bonus
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -ffast-math -O3
+CFLAGS = -Wall -Wextra -Werror -g -ffast-math #-O3
 
 SRCDIR = src
 OBJDIR = obj

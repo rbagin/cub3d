@@ -16,13 +16,13 @@
 
 static void	set_orientation(t_player *p, char orient)
 {
-	const char t_player	table[4] = {
-	{'N', 0.0, -1.0, 0.66, 0.0}
-	{'S', 0.0, 1.0, -0.66, 0.0}
-	{'E', 1.0, 0.0, 0.0, 0.66}
+	const t_orient	table[4] = {
+	{'N', 0.0, -1.0, 0.66, 0.0},
+	{'S', 0.0, 1.0, -0.66, 0.0},
+	{'E', 1.0, 0.0, 0.0, 0.66},
 	{'W', -1.0, 0.0, 0.0, -0.66}
-	}
-		int					i;
+	};
+	int				i;
 
 	i = 0;
 	while (i < 4)
@@ -46,17 +46,18 @@ void	init_player(t_player *p, char orient, int x, int y)
 	set_orientation(p, orient);
 }
 
-static void	valid_ch(char c)
+static int	valid_ch(char c)
 {
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W'
 		|| c == '1' || c == '0' || c == ' ');
 }
 
-static void	consume_spawn(t_game *g, int x, int y, char c)
+static void	consume_spawn(t_game *g, int x, int y, int *count)
 {
-	int	count;
+	int	c;
 
-	*(count++);
+	c = g->map.grid[y][x];
+	(*count)++;
 	init_player(&g->player, c, x, y);
 	g->map.grid[y][x] = '0';
 }
@@ -79,7 +80,7 @@ void	find_spawn(t_game *g)
 			if (!valid_ch(c))
 				print_exit(ERR_MAP_CHARS, g, true);
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-				consume_spawn(g, x, y, c, &count);
+				consume_spawn(g, x, y, &count);
 			x++;
 		}
 		y++;

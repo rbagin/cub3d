@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:44:27 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/16 20:48:29 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/16 23:41:24 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ static void	fill_lines(char **lines, char *file_str, t_game *g)
 	{
 		if (!store_line(lines, &i, start, curr))
 			print_exit(ERR_MEMORY, g, true);
-		i++;
 	}
 	lines[i] = NULL;
 }
@@ -104,9 +103,6 @@ char	**split_lines(char *file_str, t_game *g)
 {
 	char		**lines;
 	int			line_count;
-	int			i;
-	const char	*start;
-	const char	*curr;
 
 	if (!file_str)
 		print_exit(ERR_MEMORY, g, false);

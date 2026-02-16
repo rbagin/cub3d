@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 17:26:31 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/16 20:17:47 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/16 21:27:00 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static bool	comma_next(const char **next)
 {
 	while (**next == ' ' || **next == '\t')
 		(*next)++;
-	if (*next != ',')
+	if (**next != ',')
 		return (false);
 	(*next)++;
 	return (true);
