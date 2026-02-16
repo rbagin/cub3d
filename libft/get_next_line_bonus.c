@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 22:12:28 by imutavdz          #+#    #+#             */
-/*   Updated: 2024/12/24 00:06:03 by imutavdz         ###   ########.fr       */
+/*   Created: 2024/12/23 22:13:23 by imutavdz          #+#    #+#             */
+/*   Updated: 2024/12/24 00:16:13 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static t_gnl	*get_node(t_gnl **head, int fd)
 {

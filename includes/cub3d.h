@@ -35,6 +35,7 @@ typedef struct s_pos
 typedef struct s_player
 {
 	t_pos	pos;
+	char	orient;
 	double	dir_x;	// direction on the map
 	double	dir_y;
 	double	plane_x;	// Camera plane(perpendicular(90 degrees) to dir)
@@ -189,7 +190,7 @@ void			free_grid(char **grid);
 void			final_cleanup(t_game *g);
 void			free_textures(t_game *g);
 void			free_tex(t_game *g);
-void			free_sprite(t_game *g)
+void			free_sprite(t_game *g);
 
 //parsing map
 bool			load_map(t_game *g, const char *filename);
