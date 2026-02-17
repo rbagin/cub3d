@@ -18,6 +18,8 @@
 # define ERR_HEAD_CH "Error\nIncorrect identifier in header"
 # define ERR_MAP_CHARS "Error\nInvalid characters in map"
 # define ERR_MISS_COLOR "Error\nMissing color"
+# define ERR_COLOR_FORM "Error\nWrong color format"
+# define ERR_DUPL "Error\nInvalid duplicates"
 # define ERR_MAP_EMPTY_LN "Error\nEmpty lines inside map"
 # define ERR_MAP_LN "Error\nInvalid map line"
 # define ERR_MAP_SPAWN "Error\nMap must contain exactly one spawn"
@@ -28,7 +30,9 @@
 # define ERR_MEMORY "Error\nMemory allocation failed"
 # define ERR_MLX "Error\nMLX initialization failed"
 # define ERR_MAP_EMPTY "Error\nMAP file is invalid"
+# define ERR_MAP_SZ "Error\nMAP size invalid"
 # define ERR_NO_TEX_ID "Error\nTexture identifier not present"
+# define ERR_TEX_PATH "Error\nNo texture path"
 # define ERR_TEX_LOAD "Error\nFailed texture loading"
 # define ERR_SPR_INIT "Error\nFailed sprite initialization"
 //.cub identifiers

@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:44:27 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/16 23:41:24 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/17 12:17:46 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*extract_line(const char *start, const char *end)
 	size_t	i;
 
 	len = end - start;
-	line = malloc(len + 1);
+	line = malloc(len + 1); //should I free a line here? or is it handeled in load_map?
 	if (!line)
 		return (NULL);
 	i = 0;
