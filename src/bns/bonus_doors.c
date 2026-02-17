@@ -6,9 +6,13 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:58:40 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/08 14:10:07 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/17 15:00:12 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	find_doors(t_game *g)
+{
+	
+}

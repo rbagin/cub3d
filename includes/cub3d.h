@@ -72,6 +72,13 @@ typedef struct s_spr
 	double 			spr_y;
 }	t_spr;
 
+typedef struct s_door
+{
+	int		x;
+	int		y;
+	bool	open;
+}	t_door;
+
 typedef	struct s_ray
 {
 	double	camera_x;	// x coordinate on camera plane (-1 to 1)
