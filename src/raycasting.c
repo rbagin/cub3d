@@ -48,7 +48,7 @@ static void	init_ray_step(t_player *player, t_ray *ray)
 	}
 }
 
-static void	perform_dda(t_map *g, t_ray *ray)
+static void	perform_dda(t_game *g, t_ray *ray)
 {
 	ray->hit = false;
 	while (ray->hit == false)
@@ -67,7 +67,7 @@ static void	perform_dda(t_map *g, t_ray *ray)
 		}
 		if (hit_wall_or_bounds(&g->map, ray->map_x, ray->map_y))
 			ray->hit = true;
-		else if (hit_doors(g, ray->map_x, ray->map_y))
+		else if (hit_door(g, ray->map_x, ray->map_y))
 			ray->hit = true;
 	}
 }

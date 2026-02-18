@@ -220,7 +220,7 @@ void			parse_map_grid(char **lines, int map_start, t_game *game);
 void			find_spawn(t_game *g);
 void			valid_map(t_game *g);
 bool			is_inside(t_game *g, int x, int y);
-bool			is_out_of_bonds(t_map *map, int x, int y);
+bool			is_out_of_bounds(t_map *map, int x, int y);
 void			find_door(t_game *g);
 
 //raycasting
@@ -245,6 +245,7 @@ void			setup_hooks(t_game *game);
 void			handle_movement(t_game *game);
 bool			is_valid_position(t_game *game, double x, double y);
 void			try_move(t_game *game, t_player *player, double dx, double dy);
+void			try_open(t_game *g);
 
 //player_rotation
 void			handle_rotation(t_game *game);

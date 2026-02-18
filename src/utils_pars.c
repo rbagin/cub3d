@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 18:43:09 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/18 01:18:04 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/18 02:27:25 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,16 @@ bool	is_map_line(const char *line)
 	return (*line == '1' || *line == '0' || *line == ' ');
 }
 
-bool	is_out_of_bonds(t_map *map, int x, int y)
+bool	is_out_of_bounds(t_map *map, int x, int y)
 {
 	return (x < 0 || x >= map->width || y < 0 || y >= map->height);
+}
+
+bool	hit_wall_or_bounds(t_map *map, int x, int y)
+{
+	if (is_out_of_bounds(map, x, y))
+		return (true);
+	return (map->grid[y][x] == '1');
 }
 
 bool	is_inside(t_game *g, int x, int y)
