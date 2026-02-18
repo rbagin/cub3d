@@ -20,7 +20,8 @@
 //player can't wak out of bounds
 static bool	is_walkable(char c)
 {
-	return (c == 'W' || c == 'N' || c == 'E' || c == 'S' || c == 'D' || c == '0');
+	return (c == 'W' || c == 'N' || c == 'E'
+		|| c == 'S' || c == 'D' || c == '0');
 }
 
 void	flfill_pl_pos(t_game *g, int x, int y, bool **checked)

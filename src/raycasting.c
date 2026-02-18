@@ -48,7 +48,7 @@ static void	init_ray_step(t_player *player, t_ray *ray)
 	}
 }
 
-static void	perform_dda(t_map *map, t_ray *ray)
+static void	perform_dda(t_map *g, t_ray *ray)
 {
 	ray->hit = false;
 	while (ray->hit == false)
@@ -65,9 +65,9 @@ static void	perform_dda(t_map *map, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->map_x < 0 || ray->map_x >= map->width || ray->map_y < 0
-			|| ray->map_y >= map->height
-			|| map->grid[ray->map_y][ray->map_x] == '1')
+		if (hit_wall_or_bounds(&g->map, ray->map_x, ray->map_y))
+			ray->hit = true;
+		else if (hit_doors(g, ray->map_x, ray->map_y))
 			ray->hit = true;
 	}
 }

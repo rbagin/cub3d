@@ -180,6 +180,8 @@ typedef	struct	s_game
 	mlx_texture_t	**s_frames;
 	t_spr			*sprite;
 	double			z_buff[SCREEN_WIDTH];
+	t_door			*door;
+	int				num_doors;
 }	t_game;
 
 static inline uint32_t	rgb_to_rgba(int rgb)
@@ -195,6 +197,7 @@ void			init_minimap(t_game *g);
 bool			init_sprite(t_game *g);
 bool			load_spr(t_game *g);
 void			set_spr_spawn(t_game *g);
+void			init_door(t_game *g, int count);
 //rgb.c
 bool			parse_rgb(const char *s, int *out_color);
 
@@ -217,10 +220,13 @@ void			parse_map_grid(char **lines, int map_start, t_game *game);
 void			find_spawn(t_game *g);
 void			valid_map(t_game *g);
 bool			is_inside(t_game *g, int x, int y);
+bool			is_out_of_bonds(t_map *map, int x, int y);
+void			find_door(t_game *g);
 
 //raycasting
 void			cast_ray(t_player *player, t_map *map, t_ray *ray);
-
+bool			hit_door(t_game *g, int x, int y);
+bool			hit_wall_or_bounds(t_map *map, int x, int y);
 //render
 void			render_scene(t_game *game, t_player *player, t_ray *ray);
 uint32_t		get_wall_color(t_ray *ray);
