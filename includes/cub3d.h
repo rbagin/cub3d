@@ -224,6 +224,7 @@ void			valid_map(t_game *g);
 bool			is_inside(t_game *g, int x, int y);
 bool			is_out_of_bounds(t_map *map, int x, int y);
 void			find_door(t_game *g);
+int				pos_door(t_game *g, int x, int y);
 
 //raycasting
 void			cast_ray(t_player *player, t_game *g, t_ray *ray);
