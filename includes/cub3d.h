@@ -120,7 +120,8 @@ typedef enum e_side
 	TEX_N = 0,
 	TEX_S = 1,
 	TEX_W = 2,
-	TEX_E = 3
+	TEX_E = 3,
+	TEX_D = 4
 }	t_side;
 
 typedef struct s_tex_path
@@ -129,6 +130,7 @@ typedef struct s_tex_path
 	char	*so;
 	char	*we;
 	char	*ea;
+	char	*d;
 }			t_texpath;
 
 typedef struct s_color
@@ -169,7 +171,7 @@ typedef	struct	s_game
 	t_map			map;
 	t_color			color;
 	t_texpath		paths;
-	t_texset		tex[4];
+	t_texset		tex[5];
 	int				screen_w;
 	int				screen_h;
 	mlx_image_t		*img_mini;
