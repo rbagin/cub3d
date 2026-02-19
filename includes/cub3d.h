@@ -224,7 +224,7 @@ bool			is_out_of_bounds(t_map *map, int x, int y);
 void			find_door(t_game *g);
 
 //raycasting
-void			cast_ray(t_player *player, t_map *map, t_ray *ray);
+void			cast_ray(t_player *player, t_game *g, t_ray *ray);
 bool			hit_door(t_game *g, int x, int y);
 bool			hit_wall_or_bounds(t_map *map, int x, int y);
 //render

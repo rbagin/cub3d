@@ -86,12 +86,12 @@ void	calc_perp_dist(t_player *player, t_ray *ray)
 	}
 }
 
-void	cast_ray(t_player *player, t_map *map, t_ray *ray)
+void	cast_ray(t_player *player, t_game *g, t_ray *ray)
 {
 	ray->map_x = floor(player->pos.x);
 	ray->map_y = floor(player->pos.y);
 	init_ray_delta(ray);
 	init_ray_step(player, ray);
-	perform_dda(map, ray);
+	perform_dda(g, ray);
 	calc_perp_dist(player, ray);
 }

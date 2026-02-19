@@ -6,13 +6,13 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:58:40 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/18 02:29:40 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/19 06:45:36 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	find_doors(t_game *g)
+void	find_door(t_game *g)
 {
 	int	x;
 	int	y;
@@ -59,7 +59,7 @@ void	try_open(t_game *g)
 
 	door_x = (int)(g->player.pos.x + g->player.dir_x * 1.5);
 	door_y = (int)(g->player.pos.y + g->player.dir_y * 1.5);
-	if (!is_out_of_bonds(&g->map, door_x, door_y))
+	if (is_out_of_bounds(&g->map, door_x, door_y))
 		return ;
 	if (g->map.grid[door_y][door_x] != 'D')
 		return ;
@@ -86,7 +86,7 @@ bool	hit_door(t_game *g, int x, int y)
 {
 	if (is_out_of_bounds(&g->map, x, y))
 		return (false);
-	if (g->map->grid[y][x] != 'D')
+	if (g->map.grid[y][x] != 'D')
 		return (false);
 	return (!open_door(g, x, y));
 }
