@@ -6,15 +6,13 @@
 /*   By: ravi-bagin <ravi-bagin@student.codam.nl      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/02/03 13:13:21 by ravi-bagin    #+#    #+#                 */
-/*   Updated: 2026/02/08 20:31:50 by imutavdz    ########   odam.nl           */
+/*   Updated: 2026/02/23 14:48:38 by rbagin        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 #define SPEED 2
-//check first diagonal (no jitter)
-//if diagonal failed - slide along wall.
 static void	calculate_forward_backward(t_game *game, double *dx, double *dy)
 {
 	t_player	*player;
