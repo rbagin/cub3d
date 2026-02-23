@@ -13,6 +13,7 @@
 #include "cub3d.h"
 
 #define SPEED 2
+
 static void	calculate_forward_backward(t_game *game, double *dx, double *dy)
 {
 	t_player	*player;
