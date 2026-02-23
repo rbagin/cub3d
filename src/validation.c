@@ -18,31 +18,47 @@
 //Map validation (flood fill to ensure walls surround player)
 //no holes in the wall
 //player can't wak out of bounds
-static bool	is_walkable(char c)
+static void	free_checked(bool **checked, int h)
 {
-	return (c == 'W' || c == 'N' || c == 'E' || c == 'S' || c == 'D' || c == '0');
+	int	i;
+
+	if (!checked)
+		return ;
+	i = 0;
+	while (i < h)
+	{
+		free(checked[i]);
+		i++;
+	}
+	free(checked);
 }
 
 void	flfill_pl_pos(t_game *g, int x, int y, bool **checked)
 {
 	char	c;
 
-	if (x < 0 || y < 0 || x > g->map.width || y > g->map.height)
+	if (x < 0 || y < 0 || x >= g->map.width || y >= g->map.height)
+	{
+		free_checked(checked, g->map.height);
 		print_exit(ERR_MAP_WALLS, g, true);
+	}
 	if (checked[y][x])
 		return ;
 	c = g->map.grid[y][x];
 	if (c == '1')
 		return ;
 	if (c == ' ')
+	{
+		free_checked(checked, g->map.height);
 		print_exit(ERR_MAP_WALLS, g, true);
+	}
 	if (is_walkable(c))
 	{
 		checked[y][x] = true;
-		flfill_pl_pos(g, x + 1, y, checked); //r
-		flfill_pl_pos(g, x - 1, y, checked); //l
-		flfill_pl_pos(g, x, y + 1, checked); //d
-		flfill_pl_pos(g, x, y - 1, checked); //u
+		flfill_pl_pos(g, x + 1, y, checked);
+		flfill_pl_pos(g, x - 1, y, checked);
+		flfill_pl_pos(g, x, y + 1, checked);
+		flfill_pl_pos(g, x, y - 1, checked);
 	}
 }
 

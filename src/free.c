@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 18:07:48 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/14 18:12:20 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/02/23 20:39:36 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	free_sprite(t_game *g)
 		i = 0;
 		while (i < 3)
 		{
-			if (g->s_frames)
+			if (g->s_frames[i])
 				mlx_delete_texture(g->s_frames[i]);
 			i++;
 		}
