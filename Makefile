@@ -29,6 +29,7 @@ SRC_BOTH = grid.c \
 		validation.c \
 		cleanup.c \
 		free.c \
+		utils_door.c \
 		utils_pars.c
 SRC_BNS = bns/init_b.c \
 		bns/bonus_mouse.c \

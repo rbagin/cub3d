@@ -14,6 +14,15 @@
 //Calculate height and max width of map
 //calc_dim_map exits on blank lines, but the subject allows trailing empty 
 //lines after the map—you should stop at first blank after map start
+static void	check_trailing_lines(char **lines, int i, t_game *g)
+{
+	while (lines[i])
+	{
+		if (!is_blank_line(lines[i]))
+			print_exit(ERR_MAP_LN, g, true);
+		i++;
+	}
+}
 
 static void	calc_dim_map(char **lines, int m_start, t_game *g)
 {
@@ -36,6 +45,7 @@ static void	calc_dim_map(char **lines, int m_start, t_game *g)
 	}
 	if (height == 0 || max_width == 0)
 		print_exit(ERR_MAP_EMPTY, g, true);
+	check_trailing_lines(lines, m_start + height, g);
 	g->map.height = height;
 	g->map.width = max_width;
 }

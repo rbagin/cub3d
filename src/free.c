@@ -6,7 +6,7 @@
 /*   By: imutavdz <imutavdz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 18:07:48 by imutavdz          #+#    #+#             */
-/*   Updated: 2026/02/23 20:39:36 by imutavdz         ###   ########.fr       */
+/*   Updated: 2026/04/23 17:16:46 by imutavdz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,30 @@ void	free_grid(char **grid)
 void	free_tex(t_game *g)
 {
 	if (g->paths.no)
+	{
 		free(g->paths.no);
+		g->paths.no = NULL;
+	}
 	if (g->paths.so)
+	{
 		free(g->paths.so);
+		g->paths.so = NULL;
+	}
 	if (g->paths.we)
+	{
 		free(g->paths.we);
+		g->paths.we = NULL;
+	}
 	if (g->paths.ea)
+	{
 		free(g->paths.ea);
+		g->paths.ea = NULL;
+	}
+	if (g->paths.d)
+	{
+		free(g->paths.d);
+		g->paths.d = NULL;
+	}
 }
 
 void	free_textures(t_game *g)
@@ -94,5 +111,10 @@ void	free_textures(t_game *g)
 	{
 		mlx_delete_xpm42(g->tex[TEX_E].xpm);
 		g->tex[TEX_E].xpm = NULL;
+	}
+	if (g->tex[TEX_D].xpm && g->paths.d)
+	{
+		mlx_delete_xpm42(g->tex[TEX_D].xpm);
+		g->tex[TEX_D].xpm = NULL;
 	}
 }

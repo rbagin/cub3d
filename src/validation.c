@@ -18,6 +18,13 @@
 //Map validation (flood fill to ensure walls surround player)
 //no holes in the wall
 //player can't wak out of bounds
+
+static bool	is_walkable(char c)
+{
+	return (c == 'W' || c == 'N' || c == 'E'
+		|| c == 'S' || c == 'D' || c == '0');
+}
+
 static void	free_checked(bool **checked, int h)
 {
 	int	i;
